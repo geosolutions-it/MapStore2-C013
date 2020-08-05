@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/geosolutions-it/MapStore2-C013.svg?branch=master)](https://travis-ci.org/geosolutions-it/MapStore2-C013)
+
 MapStore 2 project for FAO - Democratic Republic of the Congo
 ==========
 
