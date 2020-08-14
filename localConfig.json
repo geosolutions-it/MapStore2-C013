@@ -175,10 +175,6 @@
       },
       "locales":{
         "supportedLocales":{
-          "it":{
-            "code":"it-IT",
-            "description":"Italiano"
-          },
           "en":{
             "code":"en-US",
             "description":"English"
@@ -186,14 +182,6 @@
           "fr":{
             "code":"fr-FR",
             "description":"Français"
-          },
-          "de":{
-            "code":"de-DE",
-            "description":"Deutsch"
-          },
-          "es":{
-            "code":"es-ES",
-            "description":"Español"
           }
         }
       }
@@ -736,58 +724,35 @@
       {
         "name":"ManagerMenu",
         "cfg":{
-          "enableContextManager":true
+          "enableContextManager":false
         }
       },
       "Login",
+      "Socials",
       "Language",
       "NavMenu",
-      "Attribution",
-      "ScrollTop",
       "Notifications"
     ],
     "maps":[
-      "HomeDescription",
-      "MapSearch",
-      "CreateNewMap",
-      "FeaturedMaps",
-      "ContentTabs",
+      "Header",
+      "LogoDescription",
+      {"name": "CreateNewMap",
+      "cfg": {
+        "showNewDashboard": false,
+        "showNewGeostory": false
+      }},
+      {
+        "name":"ManagerMenu",
+        "cfg":{
+          "enableContextManager":false
+        }
+      },
       {
         "name":"Maps",
         "cfg":{
           "mapsOptions":{
             "start":0,
-            "limit":12
-          },
-          "fluid":true
-        }
-      },
-      {
-        "name":"Dashboards",
-        "cfg":{
-          "mapsOptions":{
-            "start":0,
-            "limit":12
-          },
-          "fluid":true
-        }
-      },
-      {
-        "name":"GeoStories",
-        "cfg":{
-          "mapsOptions":{
-            "start":0,
-            "limit":12
-          },
-          "fluid":true
-        }
-      },
-      {
-        "name":"Contexts",
-        "cfg":{
-          "mapsOptions":{
-            "start":0,
-            "limit":12
+            "limit":6
           },
           "fluid":true
         }
@@ -801,170 +766,20 @@
         }
       }
     ],
-    "dashboard":[
-      {
-        "name":"OmniBar",
-        "cfg":{
-          "containerPosition":"header",
-          "className":"navbar shadow navbar-home"
-        }
-      },
-      "Login",
-      "Language",
-      "NavMenu",
-      "DashboardSave",
-      "DashboardSaveAs",
-      "Attribution",
-      "Home",
-      {
-        "name":"Share",
-        "cfg":{
-          "embedPanel":false,
-          "advancedSettings":false
-        }
-      },
-      {
-        "name":"DashboardEditor",
-        "cfg":{
-          "catalog":{
-            "url":"https://gs-stable.geo-solutions.it/geoserver/csw",
-            "type":"csw",
-            "title":"GeoSolutions GeoServer CSW",
-            "autoload":true
-          },
-          "containerPosition":"columns"
-        }
-      },
-      {
-        "name":"QueryPanel",
-        "cfg":{
-          "toolsOptions":{
-            "hideCrossLayer":true,
-            "hideSpatialFilter":true
-          },
-          "containerPosition":"columns"
-        }
-      },
-      "BurgerMenu",
-      "Dashboard",
-      "Notifications",
-      {
-        "name":"Tutorial",
-        "cfg":{
-          "allowClicksThruHole":false,
-          "containerPosition":"header",
-          "preset":"dashboard_tutorial"
-        }
-      },
-      {
-        "name":"FeedbackMask",
-        "cfg":{
-          "containerPosition":"header"
-        }
-      }
-    ],
-    "geostory":[
-      {
-        "name":"OmniBar",
-        "cfg":{
-          "containerPosition":"header",
-          "className":"navbar shadow navbar-home"
-        }
-      },
-      {
-        "name":"Tutorial",
-        "cfg":{
-          "allowClicksThruHole":false,
-          "containerPosition":"header",
-          "preset":"geostory_view_tutorial"
-        }
-      },
-      "Login",
-      "BurgerMenu",
-      "Language",
-      "NavMenu",
-      "Attribution",
-      "Home",
-      "GeoStory",
-      "GeoStorySave",
-      "GeoStorySaveAs",
-      "MapEditor",
-      "MediaEditor",
-      {
-        "name":"GeoStoryEditor",
-        "cfg":{
-          "disablePluginIf":"{!!(state('browser') && state('browser').mobile)}",
-          "containerPosition":"columns"
-        }
-      },
-      {
-        "name":"GeoStoryNavigation",
-        "cfg":{
-          "containerPosition":"header"
-        }
-      },
-      "Notifications",
-      {
-        "name":"FeedbackMask",
-        "cfg":{
-          "containerPosition":"header"
-        }
-      },
-      {
-        "name":"Share",
-        "cfg":{
-          "embedPanel":false,
-          "advancedSettings":{
-            "homeButton":true
-          }
-        }
-      }
-    ],
-    "context-creator":[
-      {
-        "name":"OmniBar",
-        "cfg":{
-          "containerPosition":"header",
-          "className":"navbar shadow navbar-home"
-        }
-      },
-      "Redirect",
-      "Login",
-      "Language",
-      "NavMenu",
-      "Attribution",
-      "Tutorial",
-      {
-        "name":"ContextCreator",
-        "cfg":{
-          "documentationBaseURL":"https://mapstore.geo-solutions.it/mapstore/docs/api/plugins",
-          "backToPageDestRoute":"/context-manager",
-          "backToPageConfirmationMessage":"contextCreator.undo"
-        }
-      },
-      "Notifications",
-      {
-        "name":"FeedbackMask",
-        "cfg":{
-          "containerPosition":"header"
-        }
-      }
-    ],
     "manager":[
       "Header",
+      "LogoDescription",
       "Redirect",
       "Manager",
       "Home",
       "UserManager",
-      "GroupManager",
-      "Footer"
+      "GroupManager"
     ],
     "context-manager":[
       "Header",
       "Redirect",
       "Home",
-      "ContextManager",
-      "Footer"
+      "ContextManager"
     ]
   }
 }

@@ -1,0 +1,36 @@
+@import "../../../MapStore2/web/client/themes/default/variables.less";
+
+.page-maps .mapstore-header {
+    align-items: center;
+    color: #eaeaea;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    min-height: 60vh;
+    text-align: center;
+
+    h1 {       
+        font-size: 34px;
+        font-weight: 900;
+        margin-top: 2rem;
+    }
+}
+
+.page-manager .mapstore-header {
+    color: #eaeaea;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 30px;
+
+    @media screen and (min-width: 300px)
+    and (max-width: @screen-sm) {
+        min-height: 300px !important;
+    }    
+
+    h1 {  
+        font-size: 34px;
+        font-weight: 900;
+        margin-top: 2rem;        
+    }
+}

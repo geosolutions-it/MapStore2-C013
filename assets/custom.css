@@ -1,0 +1,7 @@
+#page-maps .mapstore-header,
+.manager .mapstore-header {    
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    position: relative;
+}
