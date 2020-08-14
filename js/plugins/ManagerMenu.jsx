@@ -22,6 +22,8 @@ import {TOGGLE_MAP_MANAGER} from "../actions/mapsManager";
 import HTML  from '../../MapStore2/web/client/components/I18N/HTML';
 import { isFeaturedMapsEnabled } from '../../MapStore2/web/client/selectors/featuredmaps';
 import {mapTypeSelector}  from '../../MapStore2/web/client/selectors/maptype';
+import mapsManagerReducer from '../reducers/mapsManager';
+import contentTabsEpic from '../../MapStore2/web/client/epics/contenttabs';
 
 import './managerMenu/managerMenu.less';
 import '../../MapStore2/web/client/plugins/burgermenu/burgermenu.css';
@@ -250,7 +252,7 @@ export default {
         }
     }),
     reducers: {
-        mapsManagerMenu: require('../reducers/mapsManager')
+        mapsManagerMenu: mapsManagerReducer
     },
-    epics: require('../../MapStore2/web/client/epics/contenttabs')
+    epics: contentTabsEpic
 };

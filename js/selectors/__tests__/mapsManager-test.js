@@ -12,7 +12,7 @@ import { mapsManagerOpened } from "../mapsManager";
 
 describe('mapsManager selectors', () => {
     it('mapsManagerOpened', () => {
-        expect(mapsManagerOpened({mapsManager: {openMaps: false}})).toEqual(false);
-        expect(mapsManagerOpened({mapsManager: {openMaps: true}})).toEqual(true);
+        expect(mapsManagerOpened({mapsManagerMenu: {openMaps: false}})).toEqual(false);
+        expect(mapsManagerOpened({mapsManagerMenu: {openMaps: true}})).toEqual(true);
     });
 });

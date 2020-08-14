@@ -8,7 +8,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { TOGGLE_MAP_MANAGER } = require('../actions/mapsManager');
+import { TOGGLE_MAP_MANAGER } from '../actions/mapsManager';
 
 const DEFAULT_STATE = {
     openMaps: false
@@ -17,7 +17,7 @@ const DEFAULT_STATE = {
  * Reducer for map list in menuManager.
  * Manages the state of MenuManager plugin
  */
-module.exports = (state = DEFAULT_STATE, action) => {
+export default (state = DEFAULT_STATE, action) => {
     switch (action.type) {
     case TOGGLE_MAP_MANAGER:
         return {
