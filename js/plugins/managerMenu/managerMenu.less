@@ -1,0 +1,49 @@
+@import '../../../assets/themes/default/variables.less';
+
+#mapstore-burger-menu {
+    #mapstore-burger-menu-container {
+        height: 52px;
+        width: 52px;
+    }  
+
+    .dropdown-menu-right {
+        left: 0;
+        right: initial;
+
+
+        & > li {
+            background-color: @ms2-color-primary;
+            border-bottom: 2px solid rgb(78,152,119);
+            
+            a, & a > span {
+                color: @ms2-color-white;
+            }
+        }
+
+        & > li:hover {
+            background-color:#dddddd;
+            border-bottom-color: #dddddd;
+            a, & a > span {
+
+                color: @ms2-color-primary;
+            }
+        }
+    }        
+
+    ul {
+        max-width: 370px;
+    }
+
+    #mapstore-maps-grid {
+        .glyphicon {
+            color: @ms2-color-white;
+        }
+
+        h5 {
+            text-align: center;
+        }
+
+        max-height: 40vh;
+        overflow-y: auto;
+    }
+} 
