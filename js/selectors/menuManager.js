@@ -10,4 +10,6 @@ import { get } from 'lodash';
 /**
  * gets the values of the MapsManager item state
  */
-export const mapsManagerOpened = state => get(state, "mapsManagerMenu.openMaps");
+export const mapsManagerOpened = state => get(state, "mainManagerMenu.openMaps");
+
+export const customManagerOpened = state => get(state, "mainManagerMenu.customMenus");

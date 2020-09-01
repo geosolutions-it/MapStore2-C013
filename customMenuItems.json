@@ -1,0 +1,15 @@
+[
+   {
+      "name": "Documents",
+      "items":[
+         {"name": "doc1", "link": "https://www.geosolutionsgroup.com/"},
+         {"name": "doc2", "link": "https://www.google.com/"}
+      ]
+   },{
+      "name": "Videos",
+      "items":[
+         {"name": "video1", "link": "https://mapstore.geo-solutions.it/mapstore/#/"},
+         {"name": "video2", "link": "https://www.geosolutionsgroup.com/"}
+      ]
+   }
+]
