@@ -8,11 +8,14 @@
 
 import expect from 'expect';
 
-import { mapsManagerOpened } from "../mapsManager";
+import { mapsManagerOpened, customManagerOpened } from "../menuManager";
 
-describe('mapsManager selectors', () => {
-    it('mapsManagerOpened', () => {
-        expect(mapsManagerOpened({mapsManagerMenu: {openMaps: false}})).toEqual(false);
-        expect(mapsManagerOpened({mapsManagerMenu: {openMaps: true}})).toEqual(true);
+describe('menuManager selectors', () => {
+    it('menuManagerOpened', () => {
+        expect(mapsManagerOpened({mainManagerMenu: {openMaps: false}})).toEqual(false);
+        expect(mapsManagerOpened({mainManagerMenu: {openMaps: true}})).toEqual(true);
+    });
+    it('customManagerOpened', () => {
+        expect(customManagerOpened({mainManagerMenu: {customMenus: {'testHeading': true}}})).toEqual({'testHeading': true});
     });
 });

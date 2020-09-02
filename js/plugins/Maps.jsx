@@ -103,7 +103,7 @@ class Maps extends React.Component {
 
     render() {
         return (<MapsGrid
-            maps={this.props.maps}
+            maps={this.props.maps.filter(map => !map.contextName)}
             fluid={this.props.fluid}
             title={this.props.title}
             colProps={this.props.colProps}

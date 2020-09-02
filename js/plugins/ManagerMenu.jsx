@@ -8,23 +8,21 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux';
 import PropTypes  from 'prop-types';
-import {isEmpty}  from 'lodash';
 import assign  from 'object-assign';
 import {DropdownButton, Glyphicon, MenuItem}  from 'react-bootstrap';
 
 import { itemSelected } from '../../MapStore2/web/client/actions/manager';
 import { isPageConfigured }  from "../../MapStore2/web/client/selectors/plugins";
-import { mapsManagerOpened }  from '../selectors/mapsManager';
+import { mapsManagerOpened, customManagerOpened }  from '../selectors/menuManager';
 import ToolsContainer  from '../../MapStore2/web/client/plugins/containers/ToolsContainer';
 import Message  from '../../MapStore2/web/client/plugins/locale/Message';
-import { customMenus }  from './managerMenu/customMenuItems';
-import {TOGGLE_MAP_MANAGER} from "../actions/mapsManager";
-import HTML  from '../../MapStore2/web/client/components/I18N/HTML';
 import { isFeaturedMapsEnabled } from '../../MapStore2/web/client/selectors/featuredmaps';
 import {mapTypeSelector}  from '../../MapStore2/web/client/selectors/maptype';
-import mapsManagerReducer from '../reducers/mapsManager';
+import menuManagerReducer from '../reducers/menuManager';
 import contentTabsEpic from '../../MapStore2/web/client/epics/contenttabs';
-
+import customMenusTest from '../../customMenuItems.json';
+import { customMenuHandler } from './managerMenu/customMenuHandler';
+import { mapsMenuHandler } from './managerMenu/mapsMenuHandler';
 import './managerMenu/managerMenu.less';
 import '../../MapStore2/web/client/plugins/burgermenu/burgermenu.css';
 
@@ -55,47 +53,7 @@ const Container = connect(() => ({
     id: "congo-dropdown-menu"
 }))(DropdownManager);
 
-const mapsMenuHandler = (isOpen, router, role, maps = [], mapType, defaultMap = {}) => {
-    const map = maps[0] || {};
-    if (role !== "ADMIN" && (defaultMap.path || maps.length)) {
-        return ({
-            action: () => {
-                if (!isEmpty(defaultMap) && defaultMap.id) {
-                    defaultMap.contextName
-                        ? router.history.push("/context/" + defaultMap.contextName + "/" + defaultMap.id)
-                        : router.history.push("/viewer/" + mapType + "/" + defaultMap.id);
-                } else {
-                    map.contextName
-                        ? router.history.push("/context/" + map.contextName + "/" + map.id)
-                        : router.history.push("/viewer/" + mapType + "/" + map.id);
-                }
-                return {
-                    type: "@@router/LOCATION_CHANGE",
-                    payload: {
-                        action: router.history.action,
-                        isFirstRendering: false,
-                        location: router.history.location
-                    }
-                };
-            },
-            text: <HTML msgId={"home.dropdown.mapsItem"}/>,
-            cfg: {glyph: "1-layer"}
-        });
-    }
-
-    return ({
-        action: () => {
-            return {
-                type: TOGGLE_MAP_MANAGER,
-                payload: !isOpen
-            };
-        },
-        text: <HTML msgId={"home.dropdown.mapsItem"}/>,
-        cfg: {glyph: "1-layer"}
-    });
-};
-
-class ManagerMenu extends React.Component {
+class ManagerMenu extends React.PureComponent {
     static propTypes = {
         id: PropTypes.string,
         dispatch: PropTypes.func,
@@ -194,7 +152,7 @@ class ManagerMenu extends React.Component {
             ...this.props.items
                 .filter(() => this.props.role === "ADMIN" && this.props.isOpenMapsManager)
                 .sort((a, b) => a.position - b.position),
-            ...customMenus
+            ...customMenuHandler(customMenusTest, this.props.menuStates)
                 .sort((a, b) => a.position - b.position)
         ];
     };
@@ -237,6 +195,7 @@ export default {
         controls: state.controls,
         role: state.security && state.security.user && state.security.user.role,
         isOpenMapsManager: mapsManagerOpened(state),
+        menuStates: customManagerOpened(state),
         mapType: mapTypeSelector(state),
         maps: state.maps && state.maps.results
             ? state.maps?.results?.map(map => ({...map, featuredEnabled: isFeaturedMapsEnabled(state) && state?.security?.user?.role === 'ADMIN'}))
@@ -252,7 +211,7 @@ export default {
         }
     }),
     reducers: {
-        mapsManagerMenu: mapsManagerReducer
+        mainManagerMenu: menuManagerReducer
     },
     epics: contentTabsEpic
 };

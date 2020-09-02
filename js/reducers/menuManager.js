@@ -8,10 +8,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { TOGGLE_MAP_MANAGER } from '../actions/mapsManager';
+import { TOGGLE_MAP_MANAGER, TOGGLE_CUSTOM_MANAGER } from '../actions/menuManager';
 
 const DEFAULT_STATE = {
-    openMaps: false
+    openMaps: false,
+    customMenus: {}
 };
 /**
  * Reducer for map list in menuManager.
@@ -24,8 +25,16 @@ export default (state = DEFAULT_STATE, action) => {
             ...state,
             openMaps: action.payload || false
         };
+    case TOGGLE_CUSTOM_MANAGER:
+        const { customMenus } = state;
+        return {
+            ...state,
+            customMenus: {
+                ...customMenus,
+                ...action.payload || {}
+            }
+        };
     default:
         return state;
     }
-
 };
