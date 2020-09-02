@@ -107,3 +107,30 @@
         }
     }    
 }
+
+.viewer {
+    #mapstore-navbar .MapSearchBar {
+        position: inherit;
+
+        .input-group {
+            width: 100%;
+        }
+
+        @media screen and (min-width: @screen-sm) {
+            width: 200px;
+        }
+
+        @media screen and (min-width: @screen-lg) {
+            width: 400px;
+        }
+    }
+
+    #map {
+        position: static !important;
+        height: 100% !important;
+    }
+
+    .navbar {
+        margin-bottom: 0;
+    }
+}

@@ -190,6 +190,33 @@
   "plugins":{
     "mobile":[
       {
+        "name":"OmniBar",
+        "cfg":{
+          "className":"navbar shadow navbar-home"
+        }
+      },
+      {
+        "name":"ManagerMenu",
+        "cfg":{
+          "enableContextManager":false
+        }
+      },
+      "Login",
+      "Socials",
+      "Language",
+      "NavMenu",
+      "LogoDescription",
+      {
+        "name":"Search",
+        "cfg":{
+          "showOptions":false,
+          "withToggle":[
+            "max-width: 768px",
+            "min-width: 768px"
+          ]
+        }
+      },
+      {
         "name":"Map",
         "cfg":{
           "mapOptions":{
@@ -275,16 +302,6 @@
         }
       },
       {
-        "name":"Search",
-        "cfg":{
-          "showOptions":false,
-          "withToggle":[
-            "max-width: 768px",
-            "min-width: 768px"
-          ]
-        }
-      },
-      {
         "name":"Toolbar",
         "id":"NavigationBar",
         "cfg":{
@@ -308,8 +325,6 @@
           }
         }
       },
-      "Login",
-      "OmniBar",
       "BurgerMenu",
       "Expander",
       "GlobeViewSwitcher",
@@ -323,7 +338,32 @@
       "FeedbackMask"
     ],
     "desktop":[
-      "Details",
+      {
+        "name":"OmniBar",
+        "cfg":{
+          "className":"navbar shadow navbar-home"
+        }
+      },
+      {
+        "name":"ManagerMenu",
+        "cfg":{
+          "enableContextManager":false
+        }
+      },
+      "Login",
+      "Socials",
+      "Language",
+      "NavMenu",
+      "LogoDescription",
+      {
+        "name":"Search",
+        "cfg":{
+          "withToggle":[
+            "max-width: 768px",
+            "min-width: 768px"
+          ]
+        }
+      },
       {
         "name":"Map",
         "cfg":{
@@ -388,6 +428,7 @@
           }
         }
       },
+      "BurgerMenu",
       "Home",
       "FeatureEditor",
       "WFSDownload",
@@ -510,15 +551,6 @@
         }
       },
       {
-        "name":"Search",
-        "cfg":{
-          "withToggle":[
-            "max-width: 768px",
-            "min-width: 768px"
-          ]
-        }
-      },
-      {
         "name":"Toolbar",
         "id":"NavigationBar",
         "cfg":{
@@ -565,11 +597,8 @@
           "declineUrl":"http://www.google.com"
         }
       },
-      "OmniBar",
-      "Login",
       "Save",
       "SaveAs",
-      "BurgerMenu",
       "Expander",
       "Undo",
       "Redo",

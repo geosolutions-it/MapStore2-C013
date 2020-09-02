@@ -1,3 +1,5 @@
+@import "../../../MapStore2/web/client/themes/default/variables.less";
+
 .socials-container {
     align-items: center;
     display: flex;
@@ -7,4 +9,11 @@
         margin: 0 5px;
         width: 24px;
     }
+}
+
+.viewer .socials-container {
+    @media screen and (min-width: 300px)
+        and (max-width: @screen-sm) {
+            display: none;
+        } 
 }
