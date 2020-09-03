@@ -474,6 +474,7 @@
         "name":"TOC",
         "cfg":{
           "activateMetedataTool":false,
+          "activateFilterLayer": false,
           "layerOptions":{
             "legendOptions":{
               "WMSLegendOptions":"forceLabels:on",

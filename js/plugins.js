@@ -17,6 +17,7 @@ module.exports = {
         SocialsPlugin: require('./plugins/Socials').default,
         HeaderPlugin: require('./plugins/Header').default,
         // overrided plugins
+        BackgroundSelectorPlugin: require('./plugins/BackgroundSelector').default,
         BurgerMenuPlugin: require('./plugins/BurgerMenu').default,
         CreateNewMapPlugin: require('./plugins/CreateNewMap').default,
         DrawerMenuPlugin: require('./plugins/DrawerMenu'),
@@ -25,6 +26,8 @@ module.exports = {
         ManagerMenuPlugin: require('./plugins/ManagerMenu').default,
         MapsPlugin: require('./plugins/Maps'),
         SearchPlugin: require('./plugins/Search'),
+        MapManagerMenuPlugin: require('./plugins/MapManagerMenu').default,
+        TOCPlugin: require('./plugins/TOC'),
         // product plugins
         AboutPlugin: require('../MapStore2/web/client/product/plugins/About'),
         AttributionPlugin: require('../MapStore2/web/client/product/plugins/Attribution'),
@@ -39,7 +42,6 @@ module.exports = {
         AddGroupPlugin: require('../MapStore2/web/client/plugins/AddGroup').default,
         AnnotationsPlugin: require('../MapStore2/web/client/plugins/Annotations'),
         AutoMapUpdatePlugin: require('../MapStore2/web/client/plugins/AutoMapUpdate'),
-        BackgroundSelectorPlugin: require('../MapStore2/web/client/plugins/BackgroundSelector'),
         BackgroundSwitcherPlugin: require('../MapStore2/web/client/plugins/BackgroundSwitcher'),
         CRSSelectorPlugin: require('../MapStore2/web/client/plugins/CRSSelector'),
         ContextPlugin: require('../MapStore2/web/client/plugins/Context').default,
@@ -109,7 +111,6 @@ module.exports = {
         SnapshotPlugin: require('../MapStore2/web/client/plugins/Snapshot'),
         StyleEditorPlugin: require('../MapStore2/web/client/plugins/StyleEditor'),
         TOCItemsSettingsPlugin: require('../MapStore2/web/client/plugins/TOCItemsSettings').default,
-        TOCPlugin: require('../MapStore2/web/client/plugins/TOC'),
         ThematicLayerPlugin: require('../MapStore2/web/client/plugins/ThematicLayer'),
         ThemeSwitcherPlugin: require('../MapStore2/web/client/plugins/ThemeSwitcher'),
         TimelinePlugin: require('../MapStore2/web/client/plugins/Timeline'),
