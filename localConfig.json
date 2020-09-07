@@ -279,7 +279,8 @@
           "activateMapTitle":false,
           "activateSortLayer":false,
           "activateLayerFilterTool":false,
-          "activateQueryTool":false
+          "activateQueryTool":false,
+          "activateFilterLayer": false
         }
       },
       "AddGroup",

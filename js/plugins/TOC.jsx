@@ -13,6 +13,7 @@ const { compose, branch, withPropsOnChange} = require('recompose');
 
 const {Glyphicon} = require('react-bootstrap');
 
+const {setDefaultExpanded} = require('../actions/layers');
 const {changeLayerProperties, changeGroupProperties, toggleNode, contextNode,
     moveNode, showSettings, hideSettings, updateSettings, updateNode, removeNode,
     browseData, selectNode, filterLayers, refreshLayerVersion, hideLayerMetadata,
@@ -141,10 +142,10 @@ const tocSelector = createSelector(
     })
 );
 
-const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
+const TOC = require('../components/TOC/TOC');
 const { Header } = require('../components/TOC/Header');
 const Toolbar = require('../../MapStore2/web/client/components/TOC/Toolbar');
-const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
+const DefaultGroup = require('../components/TOC/DefaultGroup');
 const DefaultLayer = require('../../MapStore2/web/client/components/TOC/DefaultLayer');
 const DefaultLayerOrGroup = require('../../MapStore2/web/client/components/TOC/DefaultLayerOrGroup');
 
@@ -231,7 +232,8 @@ class LayerTree extends React.Component {
         layerNodeComponent: PropTypes.func,
         groupNodeComponent: PropTypes.func,
         isLocalizedLayerStylesEnabled: PropTypes.bool,
-        activateBackgroundsTool: PropTypes.bool
+        activateBackgroundsTool: PropTypes.bool,
+        onSetDefaultExpanded: PropTypes.func
     };
 
     static contextTypes = {
@@ -312,7 +314,8 @@ class LayerTree extends React.Component {
         catalogActive: false,
         refreshLayerVersion: () => {},
         metadataTemplate: null,
-        activateBackgroundsTool: true
+        activateBackgroundsTool: true,
+        onSetDefaultExpanded: () => {}
     };
 
     getNoBackgroundLayers = (group) => {
@@ -333,6 +336,7 @@ class LayerTree extends React.Component {
                 visibilityCheckType={this.props.visibilityCheckType}
                 currentLocale={this.props.currentLocale}
                 selectedNodes={this.props.selectedNodes}
+                setDefaultExpanded={this.props.onSetDefaultExpanded}
                 onSelect={this.props.activateToolsContainer ? this.props.onSelectNode : null}/>);
     }
 
@@ -789,6 +793,7 @@ const TOCPlugin = connect(tocSelector, {
     layerPropertiesChangeHandler: changeLayerProperties,
     retrieveLayerData: getLayerCapabilities,
     onToggleGroup: LayersUtils.toggleByType('groups', toggleNode),
+    onSetDefaultExpanded: setDefaultExpanded,
     onToggleLayer: LayersUtils.toggleByType('layers', toggleNode),
     onContextMenu: contextNode,
     onBrowseData: browseData,
@@ -845,7 +850,8 @@ module.exports = {
     }),
     reducers: {
         queryform: require('../../MapStore2/web/client/reducers/queryform'),
-        query: require('../../MapStore2/web/client/reducers/query')
+        query: require('../../MapStore2/web/client/reducers/query'),
+        layers: require('../reducers/layers')
     },
     // TODO: remove this dependency, it is needed only to use getMetadataRecordById and related actions that can be moved in the TOC
     epics: require("../../MapStore2/web/client/epics/catalog").default(API)

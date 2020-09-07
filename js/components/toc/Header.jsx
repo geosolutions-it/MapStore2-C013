@@ -73,7 +73,7 @@ export class Header extends React.Component {
     renderTools = () => {
         return (
             <Row>
-                <Col xs={12} className="text-center">
+                <Col xs={12} className="text-center no-border">
                     {this.props.toolbar}
                 </Col>
             </Row>
