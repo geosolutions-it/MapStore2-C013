@@ -1,15 +1,45 @@
 [
    {
-      "name": "Documents",
+      "name": {
+         "en-US":"Documents",
+         "fr-FR":"Des documents"
+      },
       "items":[
-         {"name": "doc1", "link": "https://www.geosolutionsgroup.com/"},
-         {"name": "doc2", "link": "https://www.google.com/"}
+         {
+            "name": {
+               "en-US":"doc1",
+               "fr-FR":"docFR1"
+            },
+            "link": "https://www.geosolutionsgroup.com/"
+         },
+         {
+            "name": {
+               "en-US":"doc2",
+               "fr-FR":"docFR2"
+            },
+            "link": "https://www.google.com/"
+         }
       ]
    },{
-      "name": "Videos",
+      "name": {
+         "en-US":"Videos",
+         "fr-FR":"Vidéos"
+      },
       "items":[
-         {"name": "video1", "link": "https://mapstore.geo-solutions.it/mapstore/#/"},
-         {"name": "video2", "link": "https://www.geosolutionsgroup.com/"}
+         {
+            "name": {
+               "en-US":"video1",
+               "fr-FR":"Vidéo1"
+            },
+            "link": "https://mapstore.geo-solutions.it/mapstore/#/"
+         },
+         {
+            "name": {
+               "en-US":"video2",
+               "fr-FR":"Vidéo2"
+            },
+            "link": "https://www.geosolutionsgroup.com/"
+         }
       ]
    }
 ]

@@ -11,18 +11,25 @@ import PropTypes  from 'prop-types';
 import assign  from 'object-assign';
 import {DropdownButton, Glyphicon, MenuItem}  from 'react-bootstrap';
 
+import Message  from '../../MapStore2/web/client/plugins/locale/Message';
+import ToolsContainer  from '../../MapStore2/web/client/plugins/containers/ToolsContainer';
+
 import { itemSelected } from '../../MapStore2/web/client/actions/manager';
+
 import { isPageConfigured }  from "../../MapStore2/web/client/selectors/plugins";
 import { mapsManagerOpened, customManagerOpened }  from '../selectors/menuManager';
-import ToolsContainer  from '../../MapStore2/web/client/plugins/containers/ToolsContainer';
-import Message  from '../../MapStore2/web/client/plugins/locale/Message';
+
 import { isFeaturedMapsEnabled } from '../../MapStore2/web/client/selectors/featuredmaps';
-import {mapTypeSelector}  from '../../MapStore2/web/client/selectors/maptype';
+import { mapTypeSelector }  from '../../MapStore2/web/client/selectors/maptype';
+import { currentLocaleSelector } from "../../MapStore2/web/client/selectors/locale";
+
 import menuManagerReducer from '../reducers/menuManager';
 import contentTabsEpic from '../../MapStore2/web/client/epics/contenttabs';
-import customMenusTest from '../../customMenuItems.json';
+
+import customMenuItems from '../../customMenuItems.json';
 import { customMenuHandler } from './managerMenu/customMenuHandler';
 import { mapsMenuHandler } from './managerMenu/mapsMenuHandler';
+
 import './managerMenu/managerMenu.less';
 import '../../MapStore2/web/client/plugins/burgermenu/burgermenu.css';
 
@@ -72,7 +79,8 @@ class ManagerMenu extends React.PureComponent {
         items: PropTypes.array,
         isOpenMapsManager: PropTypes.bool,
         maps: PropTypes.array,
-        defaultMap: PropTypes.object
+        defaultMap: PropTypes.object,
+        currentLocale: PropTypes.string
     };
 
     static contextTypes = {
@@ -120,7 +128,8 @@ class ManagerMenu extends React.PureComponent {
         onSelect: () => {},
         isOpenMapsManager: false,
         maps: [],
-        defaultMap: {}
+        defaultMap: {},
+        currentLocale: 'en-US'
     };
 
     getTools = () => {
@@ -152,7 +161,7 @@ class ManagerMenu extends React.PureComponent {
             ...this.props.items
                 .filter(() => this.props.role === "ADMIN" && this.props.isOpenMapsManager)
                 .sort((a, b) => a.position - b.position),
-            ...customMenuHandler(customMenusTest, this.props.menuStates)
+            ...customMenuHandler(customMenuItems, this.props.menuStates, this.props.currentLocale)
                 .sort((a, b) => a.position - b.position)
         ];
     };
@@ -199,7 +208,8 @@ export default {
         mapType: mapTypeSelector(state),
         maps: state.maps && state.maps.results
             ? state.maps?.results?.map(map => ({...map, featuredEnabled: isFeaturedMapsEnabled(state) && state?.security?.user?.role === 'ADMIN'}))
-            : []
+            : [],
+        currentLocale: currentLocaleSelector(state)
     }), {
         itemSelected
     })(ManagerMenu), {
