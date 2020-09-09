@@ -1,0 +1,57 @@
+@import "../../../MapStore2/web/client/themes/default/variables.less";
+
+.toc-group-children.preview {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+
+    @media screen and (max-width: @screen-sm) {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .preview {
+        margin: 10px;
+        max-height: 200px;
+        position: relative;
+        text-align: center;
+        width: 180px;
+        
+        .toc-title {
+            max-width: 120px;
+            text-align: center;
+        }
+
+        img {
+            height: 150px;
+            pointer-events: none;
+            width: 100%;            
+        }
+        
+        &.selected {
+            .toc-default-layer-head {
+    
+                .toc-layer-tool.glyphicon,
+                > .toc-title.toc-title {
+                    color: #fafafa;
+                }
+                
+                background-color: #50a07c !important;
+            }
+        }
+
+        &.toc-default-layer.visibility {
+            opacity: 1;
+
+            img,
+            .toc-default-layer-head {
+                opacity: 0.6;
+            }
+
+        }
+        
+        &.is-placeholder {
+            height: initial !important;
+        }
+    }
+}

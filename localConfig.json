@@ -196,7 +196,7 @@
         }
       },
       {
-        "name":"ManagerMenu",
+        "name":"MapManagerMenu",
         "cfg":{
           "enableContextManager":false
         }
@@ -280,7 +280,8 @@
           "activateSortLayer":false,
           "activateLayerFilterTool":false,
           "activateQueryTool":false,
-          "activateFilterLayer": false
+          "activateFilterLayer": false,
+          "activateLegendTool": false
         }
       },
       "AddGroup",
@@ -346,7 +347,7 @@
         }
       },
       {
-        "name":"ManagerMenu",
+        "name":"MapManagerMenu",
         "cfg":{
           "enableContextManager":false
         }
@@ -476,6 +477,7 @@
         "cfg":{
           "activateMetedataTool":false,
           "activateFilterLayer": false,
+          "activateLegendTool": false,
           "layerOptions":{
             "legendOptions":{
               "WMSLegendOptions":"forceLabels:on",

@@ -14,6 +14,7 @@ const { compose, branch, withPropsOnChange} = require('recompose');
 const {Glyphicon} = require('react-bootstrap');
 
 const {setDefaultExpanded} = require('../actions/layers');
+const {catalogRecordsSelector} = require('../selectors/catalog');
 const {changeLayerProperties, changeGroupProperties, toggleNode, contextNode,
     moveNode, showSettings, hideSettings, updateSettings, updateNode, removeNode,
     browseData, selectNode, filterLayers, refreshLayerVersion, hideLayerMetadata,
@@ -92,8 +93,9 @@ const tocSelector = createSelector(
         generalInfoFormatSelector,
         isCesium,
         userSelector,
-        isLocalizedLayerStylesEnabledSelector
-    ], (enabled, groups, settings, layerMetadata, wfsdownload, map, currentLocale, currentLocaleLanguage, selectedNodes, filterText, layers, mapName, catalogActive, activateWidgetTool, generalInfoFormat, isCesiumActive, user, isLocalizedLayerStylesEnabled) => ({
+        isLocalizedLayerStylesEnabledSelector,
+        catalogRecordsSelector
+    ], (enabled, groups, settings, layerMetadata, wfsdownload, map, currentLocale, currentLocaleLanguage, selectedNodes, filterText, layers, mapName, catalogActive, activateWidgetTool, generalInfoFormat, isCesiumActive, user, isLocalizedLayerStylesEnabled, catalogRecords) => ({
         enabled,
         groups,
         settings,
@@ -138,15 +140,16 @@ const tocSelector = createSelector(
         catalogActive,
         activateWidgetTool,
         user,
-        isLocalizedLayerStylesEnabled
+        isLocalizedLayerStylesEnabled,
+        catalogRecords
     })
 );
 
 const TOC = require('../components/TOC/TOC');
 const { Header } = require('../components/TOC/Header');
-const Toolbar = require('../../MapStore2/web/client/components/TOC/Toolbar');
+const { Toolbar } = require('../components/TOC/Toolbar');
 const DefaultGroup = require('../components/TOC/DefaultGroup');
-const DefaultLayer = require('../../MapStore2/web/client/components/TOC/DefaultLayer');
+const DefaultLayer = require('../components/TOC/DefaultLayer');
 const DefaultLayerOrGroup = require('../../MapStore2/web/client/components/TOC/DefaultLayerOrGroup');
 
 class LayerTree extends React.Component {
@@ -197,6 +200,7 @@ class LayerTree extends React.Component {
         activateSettingsTool: PropTypes.bool,
         activateMetedataTool: PropTypes.bool,
         activateWidgetTool: PropTypes.bool,
+        activatePreviewTool: PropTypes.bool,
         maxDepth: PropTypes.number,
         visibilityCheckType: PropTypes.string,
         settingsOptions: PropTypes.object,
@@ -233,7 +237,8 @@ class LayerTree extends React.Component {
         groupNodeComponent: PropTypes.func,
         isLocalizedLayerStylesEnabled: PropTypes.bool,
         activateBackgroundsTool: PropTypes.bool,
-        onSetDefaultExpanded: PropTypes.func
+        onSetDefaultExpanded: PropTypes.func,
+        catalogRecords: PropTypes.array
     };
 
     static contextTypes = {
@@ -258,6 +263,7 @@ class LayerTree extends React.Component {
         onSelectNode: () => {},
         selectedNodes: [],
         activateOpacityTool: true,
+        activatePreviewTool: true,
         activateTitleTooltip: true,
         showFullTitleOnExpand: false,
         activateSortLayer: true,
@@ -315,7 +321,8 @@ class LayerTree extends React.Component {
         refreshLayerVersion: () => {},
         metadataTemplate: null,
         activateBackgroundsTool: true,
-        onSetDefaultExpanded: () => {}
+        onSetDefaultExpanded: () => {},
+        catalogRecords: []
     };
 
     getNoBackgroundLayers = (group) => {
@@ -337,6 +344,7 @@ class LayerTree extends React.Component {
                 currentLocale={this.props.currentLocale}
                 selectedNodes={this.props.selectedNodes}
                 setDefaultExpanded={this.props.onSetDefaultExpanded}
+                activatePreviewTool={this.props.activatePreviewTool}
                 onSelect={this.props.activateToolsContainer ? this.props.onSelectNode : null}/>);
     }
 
@@ -349,6 +357,7 @@ class LayerTree extends React.Component {
                 showFullTitleOnExpand={this.props.showFullTitleOnExpand}
                 onToggle={this.props.onToggleLayer}
                 activateOpacityTool={this.props.activateOpacityTool}
+                activatePreviewTool={this.props.activatePreviewTool}
                 onContextMenu={this.props.onContextMenu}
                 propertiesChangeHandler={this.props.layerPropertiesChangeHandler}
                 onSelect={this.props.activateToolsContainer ? this.props.onSelectNode : null}
@@ -362,7 +371,100 @@ class LayerTree extends React.Component {
                 onUpdateNode={this.props.updateNode}
                 hideOpacityTooltip={this.props.hideOpacityTooltip}
                 language={this.props.isLocalizedLayerStylesEnabled ? this.props.currentLocaleLanguage : null}
-            />
+                catalogRecords={this.props.catalogRecords}
+                toolbar={
+                    <Toolbar
+                        groups={this.props.groups}
+                        selectedLayers={this.props.selectedLayers}
+                        selectedGroups={this.props.selectedGroups}
+                        generalInfoFormat={this.props.generalInfoFormat}
+                        settings={this.props.settings}
+                        layerMetadata={this.props.layerMetadata}
+                        wfsdownload={this.props.wfsdownload}
+                        metadataTemplate={this.props.metadataTemplate}
+                        maxDepth={this.props.maxDepth}
+                        activateTool={{
+                            activateToolsContainer: this.props.activateToolsContainer,
+                            activateRemoveLayer: this.props.activateRemoveLayer,
+                            activateZoomTool: this.props.activateZoomTool,
+                            activateQueryTool: this.props.activateQueryTool,
+                            activateDownloadTool: this.props.activateDownloadTool,
+                            activateLayerSettingsTool: this.props.activateSettingsTool,
+                            includeDeleteButtonInSettings: false,
+                            activateMetedataTool: this.props.activateMetedataTool,
+                            activateWidgetTool: this.props.activateWidgetTool,
+                            activateLayerFilterTool: this.props.activateLayerFilterTool
+                        }}
+                        options={{
+                            modalOptions: {},
+                            metadataOptions: this.props.metadataOptions,
+                            settingsOptions: this.props.settingsOptions
+                        }}
+                        style={{
+                            chartStyle: this.props.chartStyle
+                        }}
+                        text={{
+                            settingsText: <Message msgId="layerProperties.windowTitle"/>,
+                            opacityText: <Message msgId="opacity"/>,
+                            elevationText: <Message msgId="elevation"/>,
+                            saveText: <Message msgId="save"/>,
+                            closeText: <Message msgId="close"/>,
+                            confirmDeleteText: <Message msgId="layerProperties.deleteLayer" />,
+                            confirmDeleteMessage: <Message msgId="layerProperties.deleteLayerMessage" />,
+                            confirmDeleteLayerGroupText: <Message msgId="layerProperties.deleteLayerGroup" />,
+                            confirmDeleteLayerGroupMessage: <Message msgId="layerProperties.deleteLayerGroupMessage" />,
+                            confirmDeleteConfirmText: <Message msgId="layerProperties.delete"/>,
+                            confirmDeleteCancelText: <Message msgId="cancel"/>,
+                            addLayer: <Message msgId="toc.addLayer"/>,
+                            addLayerTooltip: <Message msgId="toc.addLayer" />,
+                            addLayerToGroupTooltip: <Message msgId="toc.addLayerToGroup" />,
+                            addGroupTooltip: <Message msgId="toc.addGroup" />,
+                            addSubGroupTooltip: <Message msgId="toc.addSubGroup" />,
+                            createWidgetTooltip: <Message msgId="toc.createWidget"/>,
+                            zoomToTooltip: {
+                                LAYER: <Message msgId="toc.toolZoomToLayerTooltip"/>,
+                                LAYERS: <Message msgId="toc.toolZoomToLayersTooltip"/>
+                            },
+                            settingsTooltip: {
+                                LAYER: <Message msgId="toc.toolLayerSettingsTooltip"/>,
+                                GROUP: <Message msgId="toc.toolGroupSettingsTooltip"/>
+                            },
+                            featuresGridTooltip: <Message msgId="toc.toolFeaturesGridTooltip"/>,
+                            downloadToolTooltip: <Message msgId="toc.toolDownloadTooltip" />,
+                            trashTooltip: {
+                                LAYER: <Message msgId="toc.toolTrashLayerTooltip"/>,
+                                LAYERS: <Message msgId="toc.toolTrashLayersTooltip"/>,
+                                GROUP: <Message msgId="toc.toolTrashGroupTooltip"/>
+                            },
+                            reloadTooltip: {
+                                LAYER: <Message msgId="toc.toolReloadLayerTooltip"/>,
+                                LAYERS: <Message msgId="toc.toolReloadLayersTooltip"/>
+                            },
+                            layerMetadataTooltip: <Message msgId="toc.layerMetadata.toolLayerMetadataTooltip"/>,
+                            layerMetadataPanelTitle: <Message msgId="toc.layerMetadata.layerMetadataPanelTitle"/>,
+                            layerFilterTooltip: <Message msgId="toc.layerFilterTooltip"/>
+
+                        }}
+                        onToolsActions={{
+                            onZoom: this.props.onZoomToExtent,
+                            onNewWidget: this.props.onNewWidget,
+                            onBrowseData: this.props.onBrowseData,
+                            onQueryBuilder: this.props.onQueryBuilder,
+                            onDownload: this.props.onDownload,
+                            onUpdate: this.props.updateNode,
+                            onRemove: this.props.removeNode,
+                            onClear: this.props.onSelectNode,
+                            onSettings: this.props.onSettings,
+                            onUpdateSettings: this.props.updateSettings,
+                            onRetrieveLayerData: this.props.retrieveLayerData,
+                            onHideSettings: this.props.hideSettings,
+                            onReload: this.props.refreshLayerVersion,
+                            onAddLayer: this.props.onAddLayer,
+                            onAddGroup: this.props.onAddGroup,
+                            onGetMetadataRecord: this.props.onGetMetadataRecord,
+                            onHideLayerMetadata: this.props.hideLayerMetadata,
+                            onShow: this.props.layerPropertiesChangeHandler}}/>
+                }/>
         );
     }
 
@@ -397,18 +499,18 @@ class LayerTree extends React.Component {
                             maxDepth={this.props.maxDepth}
                             activateTool={{
                                 activateToolsContainer: this.props.activateToolsContainer,
-                                activateRemoveLayer: this.props.activateRemoveLayer,
+                                ...!this.props.activatePreviewTool && {activateRemoveLayer: this.props.activateRemoveLayer},
                                 activateRemoveGroup: this.props.activateRemoveGroup,
-                                activateZoomTool: this.props.activateZoomTool,
-                                activateQueryTool: this.props.activateQueryTool,
-                                activateDownloadTool: this.props.activateDownloadTool,
-                                activateSettingsTool: this.props.activateSettingsTool,
+                                ...!this.props.activatePreviewTool && {activateZoomTool: this.props.activateZoomTool},
+                                ...!this.props.activatePreviewTool && {activateQueryTool: this.props.activateQueryTool},
+                                activateGroupSettingsTool: this.props.activateSettingsTool,
+                                ...!this.props.activatePreviewTool && {activateLayerSettingsTool: this.props.activateSettingsTool},
                                 activateAddLayer: this.props.activateAddLayerButton && !this.props.catalogActive,
                                 activateAddGroup: this.props.activateAddGroupButton,
-                                includeDeleteButtonInSettings: false,
-                                activateMetedataTool: this.props.activateMetedataTool,
-                                activateWidgetTool: this.props.activateWidgetTool,
-                                activateLayerFilterTool: this.props.activateLayerFilterTool
+                                ...!this.props.activatePreviewTool && {includeDeleteButtonInSettings: false},
+                                ...!this.props.activatePreviewTool && {activateMetedataTool: this.props.activateMetedataTool},
+                                ...!this.props.activatePreviewTool && {activateWidgetTool: this.props.activateWidgetTool},
+                                ...!this.props.activatePreviewTool && {activateLayerFilterTool: this.props.activateLayerFilterTool}
                             }}
                             options={{
                                 modalOptions: {},
@@ -604,6 +706,7 @@ const checkPluginsEnhancer = branch(
  * @prop {boolean} cfg.showFullTitleOnExpand shows full length title in the legend. default `false`.
  * @prop {boolean} cfg.hideOpacityTooltip hide toolip on opacity sliders
  * @prop {string[]|string|object|function} cfg.metadataTemplate custom template for displaying metadata
+ * @prop {boolean} cfg.activatePreviewTool: show image preview of the layer and custom toolbar
  * example :
  * ```
  * {

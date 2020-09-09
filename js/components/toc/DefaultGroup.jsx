@@ -12,7 +12,7 @@ const PropTypes = require('prop-types');
 const Node = require('../../../MapStore2/web/client/components/TOC/Node');
 const draggableComponent = require('../../../MapStore2/web/client/components/TOC/enhancers/draggableComponent');
 const { GroupTitle } = require('./fragments/GroupTitle');
-const GroupChildren = require('../../../MapStore2/web/client/components/TOC/fragments/GroupChildren');
+const { GroupChildren } = require('./fragments/GroupChildren');
 const VisibilityCheck = require('../../../MapStore2/web/client/components/TOC/fragments/VisibilityCheck');
 const LayersTool = require('../../../MapStore2/web/client/components/TOC/fragments/LayersTool');
 
@@ -40,7 +40,8 @@ class DefaultGroup extends React.Component {
         isDraggable: PropTypes.bool,
         isDragging: PropTypes.bool,
         isOver: PropTypes.bool,
-        setDefaultExpanded: PropTypes.func
+        setDefaultExpanded: PropTypes.func,
+        activatePreviewTool: PropTypes.bool
     };
 
     static defaultProps = {
@@ -66,7 +67,8 @@ class DefaultGroup extends React.Component {
         isDraggable: false,
         isDragging: false,
         isOver: false,
-        setDefaultExpanded: () => {}
+        setDefaultExpanded: () => {},
+        activatePreviewTool: true
     };
 
     renderVisibility = (error) => {
@@ -110,6 +112,7 @@ class DefaultGroup extends React.Component {
                 onSort={this.props.onSort}
                 onError={this.props.onError}
                 setDndState={this.props.setDndState}
+                activatePreviewTool={this.props.activatePreviewTool}
                 position="collapsible">
                 {this.props.children}
             </GroupChildren>

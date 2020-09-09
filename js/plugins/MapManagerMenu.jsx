@@ -16,15 +16,26 @@ import { isPageConfigured }  from "../../MapStore2/web/client/selectors/plugins"
 import { mapsManagerOpened, customManagerOpened }  from '../selectors/menuManager';
 import ToolsContainer  from '../../MapStore2/web/client/plugins/containers/ToolsContainer';
 import Message  from '../../MapStore2/web/client/plugins/locale/Message';
+import HTML  from '../../MapStore2/web/client/components/I18N/HTML';
 import { isFeaturedMapsEnabled } from '../../MapStore2/web/client/selectors/featuredmaps';
 import {mapTypeSelector}  from '../../MapStore2/web/client/selectors/maptype';
 import menuManagerReducer from '../reducers/menuManager';
 import contentTabsEpic from '../../MapStore2/web/client/epics/contenttabs';
 import customMenusTest from '../../customMenuItems.json';
 import { customMenuHandler } from './managerMenu/customMenuHandler';
-import { mapsMenuHandler } from './managerMenu/mapsMenuHandler';
 import './managerMenu/managerMenu.less';
 import '../../MapStore2/web/client/plugins/burgermenu/burgermenu.css';
+import {toggleControl} from '../../MapStore2/web/client/actions/controls';
+
+const drawerMenuButton = ({
+    toggleMenu = () => {}
+}) => {
+    return ({
+        action: () => toggleMenu(),
+        text: <HTML msgId={"home.dropdown.layersItem"}/>,
+        cfg: {glyph: "1-layer"}
+    });
+};
 
 const DropdownManager = (props = {}) => {
     const [open, setOpen] = useState(props.open || false);
@@ -148,10 +159,7 @@ class MapManagerMenu extends React.PureComponent {
                         cfg: {...entry}
                     };
                 }),
-            mapsMenuHandler(this.props.isOpenMapsManager, this.context.router, this.props.role, this.props.maps, this.props.mapType, this.props.defaultMap),
-            ...this.props.items[0].items[0].items
-                .filter(() => this.props.role === "ADMIN")
-                .sort((a, b) => a.position - b.position),
+            drawerMenuButton({toggleMenu: this.props.toggleMenu}),
             ...customMenuHandler(customMenusTest, this.props.menuStates)
                 .sort((a, b) => a.position - b.position)
         ];
@@ -168,7 +176,6 @@ class MapManagerMenu extends React.PureComponent {
                     stateSelector="burgermenu"
                     eventSelector="onSelect"
                     tool={MenuItem}
-                    layerItems={this.props.items[0].items[0].items}
                     tools={this.getTools()}
                     panelStyle={this.props.panelStyle}
                     panelClassName={this.props.panelClassName}
@@ -200,7 +207,8 @@ export default {
         mapType: mapTypeSelector(state),
         maps: state.maps && state.maps.results
             ? state.maps?.results?.map(map => ({...map, featuredEnabled: isFeaturedMapsEnabled(state) && state?.security?.user?.role === 'ADMIN'}))
-            : []
+            : [],
+        toggleMenu: toggleControl.bind(null, 'drawer', null)
     }), {
         itemSelected
     })(MapManagerMenu), {
