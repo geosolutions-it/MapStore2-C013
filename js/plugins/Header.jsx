@@ -12,9 +12,19 @@ import { createPlugin } from "../../MapStore2/web/client/utils/PluginsUtils";
 import HTML from '../../MapStore2/web/client/components/I18N/HTML';
 import { backgroundImgs } from "./header/backgrounds";
 import './header/header.less';
+import {Glyphicon, Button, Tooltip, OverlayTrigger} from 'react-bootstrap';
 
 const backgroundStyle = {
     backgroundImage: `url(${backgroundImgs[Math.floor(backgroundImgs.length * Math.random())]})`
+};
+
+const footerID = 'viewer-footer';
+
+const scrollToContent = (id, scrollOptions) => {
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView(scrollOptions);
+    }
 };
 
 const Header = (props) => (
@@ -22,6 +32,9 @@ const Header = (props) => (
         <h1>
             <HTML msgId="home.title"/>
         </h1>
+        <OverlayTrigger placement="left" overlay={<Tooltip id="scrollDown-button-tooltip"><HTML msgId="home.scrollDown"/></Tooltip>}>
+            <Button bsStyle="primary" className="scroll-down-button" onClick={() => scrollToContent(footerID, {block: 'start'})}><Glyphicon glyph="arrow-down"/></Button>
+        </OverlayTrigger>
     </div>
 );
 

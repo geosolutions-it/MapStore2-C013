@@ -11,7 +11,7 @@ import HTML from '../../MapStore2/web/client/components/I18N/HTML';
 import './footer/footer.less';
 
 const Footer = () => (
-    <div className="ms-footer col-md-12">
+    <div id="viewer-footer" className="ms-footer col-md-12">
         <p>
             <HTML msgId="home.footerDescription"/>
         </p>
