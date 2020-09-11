@@ -25,6 +25,8 @@ const { Settings } = require('./fragments/Settings');
 const defaultThumb = require('../../../MapStore2/web/client/components/catalog/img/default.jpg');
 
 const GlyphIndicator = localizedProps('tooltip')(withTooltip(Glyphicon));
+const axios = require('../../../MapStore2/web/client/libs/ajax');
+const SaveModal = require('../modals/Save');
 
 require('./DefaultLayer.less');
 /**
@@ -99,9 +101,30 @@ class DefaultLayer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {openSettings: false};
+        this.state = {
+            isMounted: false,
+            openSettings: false,
+            thumbnail: '',
+            openSaveThumbnail: false
+        };
     }
 
+    componentDidMount() {
+        this.setState({isMounted: true});
+        !this.props.node?.thumbURL
+        && this.props.node?.catalogURL
+        && axios.get(this.props.node?.catalogURL).then((response) => {
+            const parser = new DOMParser();
+            const fetchedThumbnail = parser.parseFromString(response.data, "text/xml")?.querySelector('[name="thumbnail"]');
+            if (fetchedThumbnail && this.state.isMounted) {
+                this.setState({thumbnail: fetchedThumbnail?.textContent});
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.state.isMounted = false;
+    }
 
     getTitle = (layer) => {
         const translation = isObject(layer.title) ? layer.title[this.props.currentLocale] || layer.title?.default : layer.title;
@@ -171,14 +194,26 @@ class DefaultLayer extends React.Component {
 
     renderThumb = (thumbURL, layer) => {
         let thumbCatalogSrc = {};
-        if (!thumbURL) {
+        if (!thumbURL || !this.state.thumbnail) {
             const recordFromCatalog = this.props.catalogRecords?.filter(record => record?.dc?.title === this.props.node.title);
             const layerURI =  recordFromCatalog[0] && recordFromCatalog[0].dc?.URI || [];
             thumbCatalogSrc = layerURI.find(uri=> uri.name === 'thumbnail') || {};
         }
-        const thumbSrc = thumbURL || thumbCatalogSrc?.value || defaultThumb;
+        const thumbSrc = thumbURL || this.state.thumbnail || thumbCatalogSrc?.value || defaultThumb;
 
         return (<Image className="preview-img" src={thumbSrc} alt={layer && this.getTitle(layer)}/>);
+    };
+
+    renderThumbnailSelector = () => {
+        return  (<LayersTool
+            node={this.props.node}
+            tooltip="toc.thumbnail"
+            key="thumbnailPopup"
+            className="toc-thumbnail"
+            ref="target"
+            glyph="pencil"
+            onClick={() => this.setState((state) => ({openSaveThumbnail: !state.openSaveThumbnail}))}
+        />);
     };
 
     renderSettings = () => {
@@ -190,7 +225,6 @@ class DefaultLayer extends React.Component {
             ref="target"
             glyph="cog"
             onClick={() => this.setState((state) => ({openSettings: !state.openSettings}))}
-            // onClick={(e) => {this.props.onSelect(this.props.node.id, 'layer', e.ctrlKey); this.setState((state) => ({openSettings: !state.openSettings}))}}
         />);
     };
 
@@ -219,24 +253,34 @@ class DefaultLayer extends React.Component {
             </div>
         );
         return (
-            <Node className={(this.props.isDragging || this.props.node.placeholder ? "is-placeholder " : "") + 'toc-default-layer ' + hide + selected + error + warning + (this.props.activatePreviewTool && ' preview')} style={this.props.style} type="layer" {...other}>
-                {!isDummy && this.props.activatePreviewTool && this.renderThumb(this.props.node.thumbnail, this.props.node)}
-                {other.isDraggable && !isDummy ? this.props.connectDragPreview(head) : head}
-                {isDummy || !this.props.activateOpacityTool || this.props.node.expanded || !this.props.node.visibility || this.props.node.loadingError === 'Error' || this.props.activatePreviewTool ? null : this.renderOpacitySlider(this.props.hideOpacityTooltip)}
-                {isDummy || this.props.activatePreviewTool || isEmpty ? null : this.renderCollapsible()}
-                {this.state.openSettings && this.props.activatePreviewTool &&
-                <Settings
-                    hideOpacityTooltip={this.props.hideOpacityTooltip}
-                    activateOpacityTool={this.props.activateOpacityTool}
+            <>
+                <Node className={(this.props.isDragging || this.props.node.placeholder ? "is-placeholder " : "") + 'toc-default-layer ' + hide + selected + error + warning + (this.props.activatePreviewTool && ' preview')} style={this.props.style} type="layer" {...other}>
+                    {!isDummy && this.props.activatePreviewTool && this.renderThumbnailSelector()}
+                    {!isDummy && this.props.activatePreviewTool && this.renderThumb(this.props.node.thumbURL, this.props.node)}
+                    {other.isDraggable && !isDummy ? this.props.connectDragPreview(head) : head}
+                    {isDummy || !this.props.activateOpacityTool || this.props.node.expanded || !this.props.node.visibility || this.props.node.loadingError === 'Error' || this.props.activatePreviewTool ? null : this.renderOpacitySlider(this.props.hideOpacityTooltip)}
+                    {isDummy || this.props.activatePreviewTool || isEmpty ? null : this.renderCollapsible()}
+                    {!isDummy && this.state.openSettings && this.props.activatePreviewTool &&
+                    <Settings
+                        hideOpacityTooltip={this.props.hideOpacityTooltip}
+                        activateOpacityTool={this.props.activateOpacityTool}
+                        node={this.props.node}
+                        onUpdateNode={this.props.onUpdateNode}
+                        visibilityCheckType={this.props.visibilityCheckType}
+                        propertiesChangeHandler={this.props.propertiesChangeHandler}
+                        toolbar={this.props.toolbar}
+                        currentLocale={this.props.currentLocale}
+                        selectedNodes={this.props.selectedNodes}
+                    />}
+                </Node>
+                <SaveModal
+                    show={this.state.openSaveThumbnail}
+                    onClose={()=> {this.setState((state) => ({openSaveThumbnail: !state.openSaveThumbnail}));}}
+                    onSave={this.props.onUpdateNode}
                     node={this.props.node}
-                    onUpdateNode={this.props.onUpdateNode}
-                    visibilityCheckType={this.props.visibilityCheckType}
-                    propertiesChangeHandler={this.props.propertiesChangeHandler}
-                    toolbar={this.props.toolbar}
-                    currentLocale={this.props.currentLocale}
-                    selectedNodes={this.props.selectedNodes}
-                />}
-            </Node>
+                    onUpdateLinkedResource={(e) => {this.setState({newThumbnail: e});}}
+                    resourceThumbnail={this.state.newThumbnail}/>
+            </>
         );
     }
 

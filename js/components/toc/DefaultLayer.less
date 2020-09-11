@@ -17,9 +17,22 @@
         text-align: center;
         width: 180px;
         
-        .toc-title {
+        .toc-default-layer-head .toc-title {
             max-width: 120px;
             text-align: center;
+            width: 100px;
+        }
+
+        .toc-thumbnail {
+            font-size: 18px;
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+            top: 5px;            
+        }
+
+        .toc-default-layer-head.toc-inline-loader {
+            margin: 0;
         }
 
         img {
@@ -54,4 +67,8 @@
             height: initial !important;
         }
     }
+}
+
+.ms-resizable-modal > .modal-content.modal-thumbnail {
+    height: 300px;
 }
