@@ -5,6 +5,7 @@
       "title": "PORTAL OF THE NATIONAL FOREST SURVEILLANCE SYSTEM",
       "country": "DEMOCRATIC REPUBLIC OF CONGO",
       "institute": "MINISTRY OF THE ENVIRONMENT AND SUSTAINABLE DEVELOPMENT",
+      "scrollDown": "Scroll down",
       "dropdown": {
         "mapsItem": "Maps"  
       },
