@@ -17,7 +17,7 @@ const {toggleControl, setControlProperty} = require('../../MapStore2/web/client/
 
 const {changeMapStyle} = require('../../MapStore2/web/client/actions/map');
 
-const {Button: ButtonB, Glyphicon, Panel} = require('react-bootstrap');
+const { Panel } = require('react-bootstrap');
 
 const Section = require('../../MapStore2/web/client/plugins/drawer/Section');
 
@@ -26,8 +26,6 @@ const {partialRight} = require('lodash');
 const assign = require('object-assign');
 
 const {mapLayoutValuesSelector} = require('../../MapStore2/web/client/selectors/maplayout');
-const tooltip = require('../../MapStore2/web/client/components/misc/enhancers/tooltip');
-const Button = tooltip(ButtonB);
 
 const menuSelector = createSelector([
     state => state.controls.drawer && state.controls.drawer.enabled,
@@ -48,36 +46,7 @@ const Menu = connect(menuSelector, {
     changeMapStyle: changeMapStyle
 })(require('../../MapStore2/web/client/plugins/drawer/Menu'));
 
-require('./drawer/drawer.less');
-
-const DrawerButton = connect(state => ({
-    disabled: state.controls && state.controls.drawer && state.controls.drawer.disabled
-}), {
-    toggleMenu: toggleControl.bind(null, 'drawer', null)
-})(({
-    id = '',
-    menuButtonStyle = {},
-    buttonStyle = 'primary',
-    buttonClassName = 'square-button ms-drawer-menu-button',
-    toggleMenu = () => {},
-    disabled = false,
-    glyph = '1-layer',
-    tooltipId = 'toc.drawerButton',
-    tooltipPosition = 'bottom'
-}) =>
-    <Button
-        id={id}
-        style={menuButtonStyle}
-        bsStyle={buttonStyle}
-        key="menu-button"
-        className={buttonClassName}
-        onClick={toggleMenu}
-        disabled={disabled}
-        tooltipId={tooltipId}
-        tooltipPosition={tooltipPosition}>
-        <Glyphicon glyph={glyph}/>
-    </Button>
-);
+require('../../MapStore2/web/client/plugins/drawer/drawer.css');
 
 /**
  * DrawerMenu plugin. Shows a left menu with some pluins rendered inside it (typically the TOC).
@@ -163,7 +132,6 @@ class DrawerMenu extends React.Component {
     render() {
         return this.getTools().length > 0 ? (
             <div id={this.props.id}>
-                <DrawerButton {...this.props} id="drawer-menu-button"/>
                 <Menu single={this.props.singleSection} {...this.props.menuOptions} title={<Message msgId="menu" />} alignment="left">
                     {this.renderItems()}
                 </Menu>
@@ -184,8 +152,7 @@ module.exports = {
         disablePluginIf: "{state('featuregridmode') === 'EDIT'}",
         FloatingLegend: {
             priority: 1,
-            name: 'drawer-menu',
-            button: DrawerButton
+            name: 'drawer-menu'
         }
     }),
     reducers: {}

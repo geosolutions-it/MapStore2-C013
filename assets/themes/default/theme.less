@@ -111,6 +111,10 @@
 .viewer {
     #mapstore-navbar .MapSearchBar {
         position: inherit;
+        @media screen and (max-width: @screen-sm) {
+            position: absolute;
+            width: 300px;
+        }
 
         .input-group {
             width: 100%;
@@ -132,5 +136,22 @@
 
     .navbar {
         margin-bottom: 0;
+    }
+
+    #mapstore-drawermenu .nav-menu {
+        min-width: 450px;
+
+        @media screen and (max-width: @screen-sm) {
+            min-width: 300px;
+        }
+    }
+
+    #mapstore-drawermenu {
+        .nav-body {
+            overflow: auto;
+            .mapstore-layers-container {
+                height: auto;
+            }
+        }
     }
 }

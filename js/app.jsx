@@ -46,4 +46,4 @@ const appConfig = require('./appConfig.js');
  */
 const plugins = require('./plugins.js');
 
-require('@mapstore/product/main')(appConfig, plugins);
+require('./main')(appConfig, plugins);
