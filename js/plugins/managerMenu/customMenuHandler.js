@@ -6,7 +6,7 @@ const DEFAULT_LANG = 'en-US';
 export const customMenuHandler = (menus = [], menuStates = {}, currentLocale = DEFAULT_LANG) => {
     const backgroundColor = "#4E97A0";
     return menus.map(menu => {
-        const nestedMenus = menu.items.filter(() => menuStates[menu.name.DEFAULT_LANG])
+        const nestedMenus = menu.items.filter(() => menuStates[menu.name[DEFAULT_LANG]])
             .map(childMenu => {
                 return ({
                     tool: MenuItem,
@@ -19,7 +19,7 @@ export const customMenuHandler = (menus = [], menuStates = {}, currentLocale = D
             text: menu.name[currentLocale],
             action: () => ({
                 type: TOGGLE_CUSTOM_MANAGER,
-                payload: {[menu.name.DEFAULT_LANG]: !menuStates[menu.name.DEFAULT_LANG]}
+                payload: {[menu.name[DEFAULT_LANG]]: !menuStates[menu.name[DEFAULT_LANG]]}
             })
         }, ...nestedMenus];
     }).flat();
