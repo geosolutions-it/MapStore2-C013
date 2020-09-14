@@ -145,11 +145,11 @@ const tocSelector = createSelector(
     })
 );
 
-const TOC = require('../components/TOC/TOC');
-const { Header } = require('../components/TOC/Header');
-const { Toolbar } = require('../components/TOC/Toolbar');
-const DefaultGroup = require('../components/TOC/DefaultGroup');
-const DefaultLayer = require('../components/TOC/DefaultLayer');
+const TOC = require('../components/toc/TOC');
+const { Header } = require('../components/toc/Header');
+const { Toolbar } = require('../components/toc/Toolbar');
+const DefaultGroup = require('../components/toc/DefaultGroup');
+const DefaultLayer = require('../components/toc/DefaultLayer');
 const DefaultLayerOrGroup = require('../../MapStore2/web/client/components/TOC/DefaultLayerOrGroup');
 
 class LayerTree extends React.Component {
