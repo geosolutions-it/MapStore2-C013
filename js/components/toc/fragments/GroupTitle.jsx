@@ -42,7 +42,7 @@ export class GroupTitle extends React.Component {
     };
 
     componentDidMount() {
-        this.props.setDefaultExpanded(this.props.node.id, {expanded: false});
+        this.props.setDefaultExpanded(this.props.node.id, {expanded: true});
     }
 
     render() {
