@@ -20,9 +20,9 @@ const SocialsEmpty = () => null;
 
 const Socials = () => (
     <div className="socials-container">
-        <Social className="social-item social-fb" href="" src={FB} alt="fb-logo"/>
-        <Social className="social-item social-twitter" href="" src={Twitter} alt="tw-logo"/>
-        <Social className="social-item social-linkedin" href="" src={Linkedin} alt="linked-logo"/>
+        <Social className="social-item social-fb" href="https://web.facebook.com/Rdc-snsf-107621564138699/?view_public_for=107621564138699" src={FB} alt="fb-logo"/>
+        <Social className="social-item social-twitter" href="https://twitter.com/SnsfDe" src={Twitter} alt="tw-logo"/>
+        <Social className="social-item social-linkedin" href="https://www.linkedin.com/company/rdc-snsf/?viewAsMember=true" src={Linkedin} alt="linked-logo"/>
     </div>
 );
 
