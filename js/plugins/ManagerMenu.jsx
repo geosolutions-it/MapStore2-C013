@@ -26,12 +26,12 @@ import { currentLocaleSelector } from "../../MapStore2/web/client/selectors/loca
 import menuManagerReducer from '../reducers/menuManager';
 import contentTabsEpic from '../../MapStore2/web/client/epics/contenttabs';
 
-import customMenuItems from '../../customMenuItems.json';
 import { customMenuHandler } from './managerMenu/customMenuHandler';
 import { mapsMenuHandler } from './managerMenu/mapsMenuHandler';
 
 import './managerMenu/managerMenu.less';
 import '../../MapStore2/web/client/plugins/burgermenu/burgermenu.css';
+import customMenuItems from '../../MapStore2/build/extensions/menuConfig.json';
 
 const DropdownManager = (props = {}) => {
     const [open, setOpen] = useState(props.open || false);
@@ -132,6 +132,15 @@ class ManagerMenu extends React.PureComponent {
         currentLocale: 'en-US'
     };
 
+    state = {
+        menuItems: []
+    };
+
+    componentDidMount() {
+        console.log('yay');
+        this.setState({menuItems: customMenuItems});
+    }
+
     getTools = () => {
         return [
             ...this.props.entries
@@ -161,7 +170,7 @@ class ManagerMenu extends React.PureComponent {
             ...this.props.items
                 .filter(() => this.props.role === "ADMIN" && this.props.isOpenMapsManager)
                 .sort((a, b) => a.position - b.position),
-            ...customMenuHandler(customMenuItems, this.props.menuStates, this.props.currentLocale)
+            ...customMenuHandler(this.state.menuItems, this.props.menuStates, this.props.currentLocale)
                 .sort((a, b) => a.position - b.position)
         ];
     };
