@@ -84,7 +84,7 @@
     },
     "scripts": {
         "postinstall": "node MapStore2/utility/build/postInstall.js",
-        "copy": "cp -r js/menuConfig/menuConfig.js MapStore2/build/extensions",
+        "copy": "cp -r js/menuConfig/menuConfig.json MapStore2/build/extensions",
         "clean": "rimraf dist",
         "compile": "npm run clean && mkdirp ./dist && webpack --config prod-webpack.config.js --env.production",
         "start": "npm run copy && webpack-dev-server --progress --colors --port 8081 --hot --inline --content-base .",

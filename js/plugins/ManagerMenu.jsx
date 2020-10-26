@@ -31,7 +31,7 @@ import { mapsMenuHandler } from './managerMenu/mapsMenuHandler';
 
 import './managerMenu/managerMenu.less';
 import '../../MapStore2/web/client/plugins/burgermenu/burgermenu.css';
-import {customMenuItems} from "mapstore2/build/extensions/menuConfig";
+import customMenuItems from '../../MapStore2/build/extensions/menuConfig.json';
 
 const DropdownManager = (props = {}) => {
     const [open, setOpen] = useState(props.open || false);
@@ -137,6 +137,7 @@ class ManagerMenu extends React.PureComponent {
     };
 
     componentDidMount() {
+        console.log('yay');
         this.setState({menuItems: customMenuItems});
     }
 
