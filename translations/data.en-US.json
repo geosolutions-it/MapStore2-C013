@@ -2,7 +2,8 @@
   "locale": "en-US",
   "messages": {
     "home": {
-      "title": "PORTAL OF THE NATIONAL<br/>FOREST SURVEILLANCE SYSTEM",
+	
+      "title": "NATIONAL FOREST<br/>MONITORING SYSTEM PORTAL",
       "country": "DEMOCRATIC REPUBLIC OF CONGO",
       "institute": "MINISTRY OF THE ENVIRONMENT AND SUSTAINABLE DEVELOPMENT",
       "scrollDown": "Scroll down",
