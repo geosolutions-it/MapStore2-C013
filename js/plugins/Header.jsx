@@ -28,7 +28,7 @@ const scrollToContent = (id, scrollOptions) => {
 };
 
 const Header = (props) => (
-    <div style={{...backgroundStyle, ...props.style}} className="mapstore-header">
+    <div id="header-id" style={{...backgroundStyle, ...props.style}} className="mapstore-header">
         <h1>
             <HTML msgId="home.title"/>
         </h1>
@@ -36,6 +36,11 @@ const Header = (props) => (
             <Button bsStyle="primary" className="scroll-down-button" onClick={() => scrollToContent(footerID, {block: 'start'})}><Glyphicon glyph="arrow-down"/></Button>
         </OverlayTrigger>
     </div>
+	<script>
+		setInterval(()=>{
+			$("#header-id").style["background-image"] = `url(${backgroundImgs[Math.floor(backgroundImgs.length * Math.random())]})`;
+		}, 5000);
+	</script>
 );
 
 Header.propTypes = {
