@@ -36,11 +36,6 @@ const Header = (props) => (
             <Button bsStyle="primary" className="scroll-down-button" onClick={() => scrollToContent(footerID, {block: 'start'})}><Glyphicon glyph="arrow-down"/></Button>
         </OverlayTrigger>
     </div>
-	<script>
-		setInterval(()=>{
-			$("#header-id").style["background-image"] = `url(${backgroundImgs[Math.floor(backgroundImgs.length * Math.random())]})`;
-		}, 5000);
-	</script>
 );
 
 Header.propTypes = {
