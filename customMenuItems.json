@@ -1,6 +1,13 @@
 [
    {
       "name": {
+         "en-US":"Home",
+         "fr-FR":"Accueil",
+		 "link": "/"
+      }
+   },
+   {
+      "name": {
          "en-US":"Documents",
          "fr-FR":"Des documents"
       },
