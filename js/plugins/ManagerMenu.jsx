@@ -28,6 +28,7 @@ import contentTabsEpic from '../../MapStore2/web/client/epics/contenttabs';
 
 import { customMenuHandler } from './managerMenu/customMenuHandler';
 import { mapsMenuHandler } from './managerMenu/mapsMenuHandler';
+import { homeMenuHandler } from './managerMenu/homeMenuHandler';
 
 import './managerMenu/managerMenu.less';
 import '../../MapStore2/web/client/plugins/burgermenu/burgermenu.css';
@@ -166,6 +167,7 @@ class ManagerMenu extends React.PureComponent {
                     };
                 }),
             mapsMenuHandler(this.props.isOpenMapsManager, this.context.router, this.props.role, this.props.maps, this.props.mapType, this.props.defaultMap),
+            homeMenuHandler(this.context.router),
             ...this.props.items
                 .filter(() => this.props.role === "ADMIN" && this.props.isOpenMapsManager)
                 .sort((a, b) => a.position - b.position),

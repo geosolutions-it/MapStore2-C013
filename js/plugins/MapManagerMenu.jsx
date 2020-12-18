@@ -23,6 +23,7 @@ import menuManagerReducer from '../reducers/menuManager';
 import contentTabsEpic from '../../MapStore2/web/client/epics/contenttabs';
 import customMenusTest from '../../customMenuItems.json';
 import { customMenuHandler } from './managerMenu/customMenuHandler';
+import { homeMenuHandler } from './managerMenu/homeMenuHandler';
 import './managerMenu/managerMenu.less';
 import '../../MapStore2/web/client/plugins/burgermenu/burgermenu.css';
 import {toggleControl} from '../../MapStore2/web/client/actions/controls';
@@ -160,6 +161,7 @@ class MapManagerMenu extends React.PureComponent {
                     };
                 }),
             drawerMenuButton({toggleMenu: this.props.toggleMenu}),
+            homeMenuHandler(this.context.router),
             ...customMenuHandler(customMenusTest, this.props.menuStates)
                 .sort((a, b) => a.position - b.position)
         ];
