@@ -8,6 +8,7 @@
       "institute": "MINISTRY OF THE ENVIRONMENT AND SUSTAINABLE DEVELOPMENT",
       "scrollDown": "Scroll down",
       "dropdown": {
+        "home": "HOME",
         "mapsItem": "Maps",
         "layersItem": "Layers"
       },
