@@ -167,7 +167,7 @@ class ManagerMenu extends React.PureComponent {
                     };
                 }),
             mapsMenuHandler(this.props.isOpenMapsManager, this.context.router, this.props.role, this.props.maps, this.props.mapType, this.props.defaultMap),
-            homeMenuHandler(this.context.router),
+            homeMenuHandler(),
             ...this.props.items
                 .filter(() => this.props.role === "ADMIN" && this.props.isOpenMapsManager)
                 .sort((a, b) => a.position - b.position),

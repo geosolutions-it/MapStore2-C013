@@ -10,18 +10,10 @@
 import React from 'react';
 import HTML  from '../../../MapStore2/web/client/components/I18N/HTML';
 
-export const homeMenuHandler = (router) => {
+export const homeMenuHandler = () => {
     return {
         action: () => {
-            router.history.push("/");
-            return {
-                type: "@@router/LOCATION_CHANGE",
-                payload: {
-                    action: router.history.action,
-                    isFirstRendering: false,
-                    location: router.history.location
-                }
-            };
+            window.location = "/";
         },
         text: <HTML msgId={"home.dropdown.home"}/>
     };

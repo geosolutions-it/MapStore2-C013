@@ -161,7 +161,7 @@ class MapManagerMenu extends React.PureComponent {
                     };
                 }),
             drawerMenuButton({toggleMenu: this.props.toggleMenu}),
-            homeMenuHandler(this.context.router),
+            homeMenuHandler(),
             ...customMenuHandler(customMenusTest, this.props.menuStates)
                 .sort((a, b) => a.position - b.position)
         ];
