@@ -195,7 +195,9 @@ export class Toolbar extends React.Component {
                 <ReactCSSTransitionGroup
                     transitionName="toc-toolbar-btn-transition"
                     transitionEnterTimeout={300}
-                    transitionLeaveTimeout={300}>
+                    transitionLeaveTimeout={300}
+                    className="toc-toolbar-wrap"
+                >
                     {this.props.activateTool.activateAddLayer && (status === 'DESELECT' || status === 'GROUP') ?
                         <OverlayTrigger
                             key="addLayer"

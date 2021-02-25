@@ -277,7 +277,7 @@ class LayerTree extends React.Component {
         activateRemoveLayer: true,
         activateRemoveGroup: true,
         activateQueryTool: true,
-        activateDownloadTool: false,
+        activateDownloadTool: true,
         activateWidgetTool: false,
         activateLayerFilterTool: false,
         maxDepth: 3,
