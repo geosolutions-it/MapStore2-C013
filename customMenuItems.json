@@ -1,45 +1,38 @@
 [
    {
       "name": {
-         "en-US":"Documents",
-         "fr-FR":"Des documents"
+         "en-US":"Links",
+         "fr-FR":"Liens"
       },
-      "items":[
-         {
-            "name": {
-               "en-US":"doc1",
-               "fr-FR":"docFR1"
-            },
-            "link": "https://www.geosolutionsgroup.com/"
-         },
-         {
-            "name": {
-               "en-US":"doc2",
-               "fr-FR":"docFR2"
-            },
-            "link": "https://www.google.com/"
-         }
-      ]
-   },{
-      "name": {
-         "en-US":"Videos",
-         "fr-FR":"Vidéos"
+    "items": [
+      {
+        "name": {
+          "en-US": "Documents",
+          "fr-FR": "Des documents"
+        },
+        "link": "https://www.geosolutionsgroup.com/"
       },
-      "items":[
-         {
-            "name": {
-               "en-US":"video1",
-               "fr-FR":"Vidéo1"
-            },
-            "link": "https://mapstore.geo-solutions.it/mapstore/#/"
-         },
-         {
-            "name": {
-               "en-US":"video2",
-               "fr-FR":"Vidéo2"
-            },
-            "link": "https://www.geosolutionsgroup.com/"
-         }
-      ]
+      {
+        "name": {
+          "en-US": "Videos",
+          "fr-FR": "Vidéos"
+        },
+        "link": "https://www.geosolutionsgroup.com/"
+      },
+      {
+        "name": {
+          "en-US": "Actualities",
+          "fr-FR": "Actualités"
+        },
+        "link": "https://www.google.com/"
+      },
+      {
+        "name": {
+          "en-US": "Tutorials",
+          "fr-FR": "Tutoriels"
+        },
+        "link": "https://www.google.com/"
+      }
+    ]
    }
 ]
