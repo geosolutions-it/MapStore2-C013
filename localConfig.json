@@ -281,7 +281,7 @@
           "activateLayerFilterTool":false,
           "activateQueryTool":false,
           "activateFilterLayer": false,
-          "activateLegendTool": false
+          "activateLegendTool": true
         }
       },
       "AddGroup",
@@ -477,7 +477,7 @@
         "cfg":{
           "activateMetedataTool":false,
           "activateFilterLayer": false,
-          "activateLegendTool": false,
+          "activateLegendTool": true,
           "layerOptions":{
             "legendOptions":{
               "WMSLegendOptions":"forceLabels:on",

@@ -41,7 +41,6 @@ class DefaultLayer extends React.Component {
         onSelect: PropTypes.func,
         style: PropTypes.object,
         sortableStyle: PropTypes.object,
-        activateLegendTool: PropTypes.bool,
         activateOpacityTool: PropTypes.bool,
         indicators: PropTypes.array,
         visibilityCheckType: PropTypes.string,
@@ -77,7 +76,6 @@ class DefaultLayer extends React.Component {
         onToggle: () => {},
         onContextMenu: () => {},
         onSelect: () => {},
-        activateLegendTool: false,
         activateOpacityTool: true,
         indicators: [],
         visibilityCheckType: "glyph",
@@ -146,12 +144,6 @@ class DefaultLayer extends React.Component {
             <div key="legend" position="collapsible" className="collapsible-toc">
                 <Grid fluid>
                     {this.props.showFullTitleOnExpand ? <Row><Col xs={12} className="toc-full-title">{this.getTitle(this.props.node)}</Col></Row> : null}
-                    {this.props.activateLegendTool ?
-                        <Row>
-                            <Col xs={12}>
-                                <WMSLegend node={this.props.node} currentZoomLvl={this.props.currentZoomLvl} scales={this.props.scales} language={this.props.language} {...this.props.legendOptions} />
-                            </Col>
-                        </Row> : null}
                 </Grid>
                 {this.renderOpacitySlider(this.props.hideOpacityTooltip)}
             </div>);
@@ -229,7 +221,7 @@ class DefaultLayer extends React.Component {
     };
 
     renderNode = (grab, hide, selected, error, warning, isDummy, other) => {
-        const isEmpty = this.props.node.type === 'wms' && !this.props.activateLegendTool && !this.props.showFullTitleOnExpand
+        const isEmpty = this.props.node.type === 'wms' && !this.props.showFullTitleOnExpand
         || this.props.node.type !== 'wms' && !this.props.showFullTitleOnExpand;
         const head = (isDummy ?
             <div style={{padding: 0, height: 10}} className="toc-default-layer-head"/> :
