@@ -15,7 +15,6 @@ const Node = require('../../../MapStore2/web/client/components/TOC/Node');
 const draggableComponent = require('../../../MapStore2/web/client/components/TOC/enhancers/draggableComponent');
 const VisibilityCheck = require('../../../MapStore2/web/client/components/TOC/fragments/VisibilityCheck');
 const Title = require('../../../MapStore2/web/client/components/TOC/fragments/Title');
-const WMSLegend = require('../../../MapStore2/web/client/components/TOC/fragments/WMSLegend');
 const LayersTool = require('../../../MapStore2/web/client/components/TOC/fragments/LayersTool');
 const OpacitySlider = require('../../../MapStore2/web/client/components/TOC/fragments/OpacitySlider');
 const ToggleFilter = require('../../../MapStore2/web/client/components/TOC/fragments/ToggleFilter');
