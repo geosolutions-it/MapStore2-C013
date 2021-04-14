@@ -17,6 +17,7 @@ import OverlayTrigger from '../../../MapStore2/web/client/components/misc/Overla
 import ConfirmModal from '../../../MapStore2/web/client/components/maps/modals/ConfirmModal';
 import LayerMetadataModal from '../../../MapStore2/web/client/components/TOC/fragments/LayerMetadataModal';
 import Message from '../../../MapStore2/web/client/components/I18N/Message';
+import Legend from "../modals/Legend";
 
 export class Toolbar extends React.Component {
 
@@ -34,6 +35,7 @@ export class Toolbar extends React.Component {
         layerMetadata: PropTypes.object,
         wfsdownload: PropTypes.object,
         maxDepth: PropTypes.number,
+        legendProps: PropTypes.object,
         metadataTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.object, PropTypes.func])
     };
 
@@ -327,7 +329,18 @@ export class Toolbar extends React.Component {
                             </Button>
                         </OverlayTrigger>
                         : null}
+                    {this.props.activateTool.activateLegendTool && (status === 'LAYER') && this.props.selectedLayers.length === 1 && this.props.selectedLayers[0].type === 'wms' && !this.props.settings.expanded && !this.props.layerMetadata.expanded && !this.props.wfsdownload.expanded ?
+                        <OverlayTrigger
+                            key="legend"
+                            placement="top"
+                            overlay={<Tooltip id="toc-tooltip-widgets">{this.props.text.legendTooltip}</Tooltip>}>
+                            <Button bsStyle="primary" className="square-button-md" onClick={()=>this.setState({showLegend: true})}>
+                                <Glyphicon glyph="th-list" />
+                            </Button>
+                        </OverlayTrigger>
+                        : null}
                 </ReactCSSTransitionGroup>
+                {this.state.showLegend && <Legend onClose={()=>this.setState({showLegend: false})} legendOptions={{node: this.props.selectedLayers[0], ...this.props.legendProps}} />}
                 <ConfirmModal
                     ref="removelayer"
                     options={{

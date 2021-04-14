@@ -2,7 +2,6 @@
   "locale": "en-US",
   "messages": {
     "home": {
-	
       "title": "NATIONAL FOREST<br/>MONITORING SYSTEM PORTAL",
       "country": "DEMOCRATIC REPUBLIC OF CONGO",
       "institute": "MINISTRY OF THE ENVIRONMENT AND SUSTAINABLE DEVELOPMENT",
@@ -16,7 +15,11 @@
     },
     "toc": {
       "settingsPopup": "Settings",
-      "thumbnail": "Thumbnail"
+      "thumbnail": "Thumbnail",
+      "legend": {
+        "title": "Legend",
+        "tooltip": "Show Legend"
+      }
     }
   }
 }

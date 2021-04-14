@@ -362,7 +362,6 @@ class LayerTree extends React.Component {
                 propertiesChangeHandler={this.props.layerPropertiesChangeHandler}
                 onSelect={this.props.activateToolsContainer ? this.props.onSelectNode : null}
                 visibilityCheckType={this.props.visibilityCheckType}
-                activateLegendTool={this.props.activateLegendTool}
                 currentZoomLvl={this.props.currentZoomLvl}
                 scales={this.props.scales}
                 currentLocale={this.props.currentLocale}
@@ -383,6 +382,12 @@ class LayerTree extends React.Component {
                         wfsdownload={this.props.wfsdownload}
                         metadataTemplate={this.props.metadataTemplate}
                         maxDepth={this.props.maxDepth}
+                        legendProps={{
+                            currentZoomLvl: this.props.currentZoomLvl,
+                            scales: this.props.scales,
+                            language: this.props.isLocalizedLayerStylesEnabled ? this.props.currentLocaleLanguage : null,
+                            legendOptions: {...this.props.layerOptions.legendOptions}
+                        }}
                         activateTool={{
                             activateToolsContainer: this.props.activateToolsContainer,
                             activateRemoveLayer: this.props.activateRemoveLayer,
@@ -393,7 +398,8 @@ class LayerTree extends React.Component {
                             includeDeleteButtonInSettings: false,
                             activateMetedataTool: this.props.activateMetedataTool,
                             activateWidgetTool: this.props.activateWidgetTool,
-                            activateLayerFilterTool: this.props.activateLayerFilterTool
+                            activateLayerFilterTool: this.props.activateLayerFilterTool,
+                            activateLegendTool: this.props.activateLegendTool
                         }}
                         options={{
                             modalOptions: {},
@@ -442,7 +448,8 @@ class LayerTree extends React.Component {
                             },
                             layerMetadataTooltip: <Message msgId="toc.layerMetadata.toolLayerMetadataTooltip"/>,
                             layerMetadataPanelTitle: <Message msgId="toc.layerMetadata.layerMetadataPanelTitle"/>,
-                            layerFilterTooltip: <Message msgId="toc.layerFilterTooltip"/>
+                            layerFilterTooltip: <Message msgId="toc.layerFilterTooltip"/>,
+                            legendTooltip: <Message msgId="toc.legend.tooltip"/>
 
                         }}
                         onToolsActions={{

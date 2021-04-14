@@ -15,7 +15,11 @@
       },
       "toc": {
         "settingsPopup": "Paramètres",
-        "thumbnail": "La vignette"
+        "thumbnail": "La vignette",
+        "legend": {
+          "title": "Légende",
+          "tooltip": "Afficher les légende"
+        }
       }
     }
   }
