@@ -6,13 +6,7 @@ export const customMenuItems = [{
     "items": [{
         "name": {
             "en-US": "Documents",
-            "fr-FR": "Des documents"
-        },
-        "link": "https://www.geosolutionsgroup.com/"
-    }, {
-        "name": {
-            "en-US": "Videos",
-            "fr-FR": "Vidéos"
+            "fr-FR": "Documents"
         },
         "link": "https://www.geosolutionsgroup.com/"
     }, {
@@ -27,5 +21,11 @@ export const customMenuItems = [{
             "fr-FR": "Tutoriels"
         },
         "link": "https://www.google.com/"
+    }, {
+        "name": {
+            "en-US": "Videos",
+            "fr-FR": "Vidéos"
+        },
+        "link": "https://www.geosolutionsgroup.com/"
     }]
 }];
