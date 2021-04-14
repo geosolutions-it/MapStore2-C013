@@ -21,7 +21,8 @@ import { isFeaturedMapsEnabled } from '../../MapStore2/web/client/selectors/feat
 import {mapTypeSelector}  from '../../MapStore2/web/client/selectors/maptype';
 import menuManagerReducer from '../reducers/menuManager';
 import contentTabsEpic from '../../MapStore2/web/client/epics/contenttabs';
-import customMenusTest from '../../customMenuItems.json';
+import { currentLocaleSelector } from "../../MapStore2/web/client/selectors/locale";
+import { customMenuItems } from "mapstore2/build/extensions/menuConfig";
 import { customMenuHandler } from './managerMenu/customMenuHandler';
 import { homeMenuHandler } from './managerMenu/homeMenuHandler';
 import './managerMenu/managerMenu.less';
@@ -84,7 +85,8 @@ class MapManagerMenu extends React.PureComponent {
         items: PropTypes.array,
         isOpenMapsManager: PropTypes.bool,
         maps: PropTypes.array,
-        defaultMap: PropTypes.object
+        defaultMap: PropTypes.object,
+        currentLocale: PropTypes.string
     };
 
     static contextTypes = {
@@ -132,7 +134,8 @@ class MapManagerMenu extends React.PureComponent {
         onSelect: () => {},
         isOpenMapsManager: false,
         maps: [],
-        defaultMap: {}
+        defaultMap: {},
+        currentLocale: 'en-US'
     };
 
     getTools = () => {
@@ -162,7 +165,7 @@ class MapManagerMenu extends React.PureComponent {
                 }),
             drawerMenuButton({toggleMenu: this.props.toggleMenu}),
             homeMenuHandler(),
-            ...customMenuHandler(customMenusTest, this.props.menuStates)
+            ...customMenuHandler(customMenuItems, this.props.menuStates, this.props.currentLocale)
                 .sort((a, b) => a.position - b.position)
         ];
     };
@@ -210,7 +213,8 @@ export default {
         maps: state.maps && state.maps.results
             ? state.maps?.results?.map(map => ({...map, featuredEnabled: isFeaturedMapsEnabled(state) && state?.security?.user?.role === 'ADMIN'}))
             : [],
-        toggleMenu: toggleControl.bind(null, 'drawer', null)
+        toggleMenu: toggleControl.bind(null, 'drawer', null),
+        currentLocale: currentLocaleSelector(state)
     }), {
         itemSelected
     })(MapManagerMenu), {
