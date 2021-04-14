@@ -11,7 +11,7 @@ export const customMenuItems = [{
         "link": "https://www.geosolutionsgroup.com/"
     }, {
         "name": {
-            "en-US": "Actualities",
+            "en-US": "News",
             "fr-FR": "Actualités"
         },
         "link": "https://www.google.com/"
