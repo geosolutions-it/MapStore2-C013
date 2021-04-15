@@ -13,3 +13,5 @@ import { get } from 'lodash';
 export const mapsManagerOpened = state => get(state, "mainManagerMenu.openMaps");
 
 export const customManagerOpened = state => get(state, "mainManagerMenu.customMenus");
+
+export const dashboardsManagerOpened = state => get(state, "mainManagerMenu.openDashboardsMenu");

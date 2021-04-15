@@ -159,8 +159,8 @@ export default {
         onNewMap: createNewMap
     })(CreateNewMap), {
         ManagerMenu: {
-            name: 'createNew',
-            key: 'createNew',
+            name: 'createNewMap',
+            key: 'createNewMap',
             position: 2,
             tool: true,
             priority: 1
