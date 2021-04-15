@@ -18,7 +18,8 @@
         "thumbnail": "La vignette",
         "legend": {
           "title": "Légende",
-          "tooltip": "Afficher les légende"
+          "tooltip": "Afficher les légende",
+          "view": "Afficher l'image dans un nouvel onglet"
         }
       }
     }

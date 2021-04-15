@@ -18,7 +18,8 @@
       "thumbnail": "Thumbnail",
       "legend": {
         "title": "Legend",
-        "tooltip": "Show Legend"
+        "tooltip": "Show Legend",
+        "view": "View image in new tab"
       }
     }
   }
