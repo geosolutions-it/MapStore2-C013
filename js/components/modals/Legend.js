@@ -9,7 +9,7 @@ import OverlayTrigger from '../../../MapStore2/web/client/components/misc/Overla
 export default ({onClose, legendOptions}) => {
     const imgElement = document.querySelector('#legend-dialog img');
     const [href, setHref] = useState(null);
-    useEffect(()=>{ setHref(imgElement?.src) },[imgElement]);
+    useEffect(()=>{ setHref(imgElement?.src); }, [imgElement]);
     return (
         <Portal>
             <Dialog id={"legend-dialog"} draggable={false} style={{width: 300}} onClickOut={onClose} modal={false}>
@@ -18,8 +18,9 @@ export default ({onClose, legendOptions}) => {
                     <button onClick={onClose} className="close"> <Glyphicon glyph="1-close"/></button>
                 </span>
                 <div role="body">
-                    <OverlayTrigger key="addLayer" placement="bottom"
-                                    overlay={<Tooltip><Message msgId={"toc.legend.view"}/></Tooltip>}>
+                    <OverlayTrigger
+                        key="addLayer" placement="bottom"
+                        overlay={<Tooltip><Message msgId={"toc.legend.view"}/></Tooltip>}>
                         <a href={href} target="_blank">
                             <WMSLegend {...legendOptions} />
                         </a>
