@@ -12,32 +12,13 @@ import HTML  from '../../../MapStore2/web/client/components/I18N/HTML';
 import {toggleDashboardManagerMenu} from "@js/actions/menuManager";
 import {includes} from "lodash";
 
-export const dashboardsMenuHandler = (isOpen, router, role, dashboards = [], items = []) => {
-    const [dashboard = {}] = dashboards || [];
-    if (role !== "ADMIN" && dashboards.length) {
-        return ({
-            action: () => {
-                dashboard && router.history.push("dashboard/" + dashboard.id);
-                return {
-                    type: "@@router/LOCATION_CHANGE",
-                    payload: {
-                        action: router.history.action,
-                        isFirstRendering: false,
-                        location: router.history.location
-                    }
-                };
-            },
-            text: <HTML msgId={"home.dropdown.dashboardsItem"}/>,
-            cfg: {glyph: "dashboard"}
-        });
-    }
-
+export const dashboardsMenuHandler = (isOpen, items = []) => {
     return ({
         action: () => toggleDashboardManagerMenu(!isOpen),
         text: <HTML msgId={"home.dropdown.dashboardsItem"}/>,
         cfg: {glyph: "dashboard"},
         items: items
-            .filter((item) => role === "ADMIN" && isOpen && includes(['dashboards', 'createNewDashboard'], item.key))
+            .filter((item) => isOpen && includes(['dashboards', 'createNewDashboard'], item.key))
             .sort((a, b) => a.position - b.position)
     });
 };

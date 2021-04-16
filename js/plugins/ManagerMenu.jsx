@@ -145,7 +145,7 @@ class ManagerMenu extends React.PureComponent {
 
     getTools = () => {
         const { items: mapPluginItems = [], ...mapHandler} = mapsMenuHandler(this.props.isOpenMapsManager, this.context.router, this.props.role, this.props.maps, this.props.mapType, this.props.defaultMap, this.props.items) || {};
-        const { items: dashboardPluginItems = [], ...dashboardHandler} = dashboardsMenuHandler(this.props.isOpenDashboardsManager, this.context.router, this.props.role, this.props.dashboards, this.props.items) || {};
+        const { items: dashboardPluginItems = [], ...dashboardHandler} = dashboardsMenuHandler(this.props.isOpenDashboardsManager, this.props.items) || {};
         return [
             ...this.props.entries
                 .filter(e => this.props.enableRulesManager || e.path !== "/rules-manager")
@@ -170,10 +170,10 @@ class ManagerMenu extends React.PureComponent {
                         cfg: {...entry}
                     };
                 }),
-            dashboardHandler,
-            ...dashboardPluginItems,
             mapHandler,
             ...mapPluginItems,
+            dashboardHandler,
+            ...dashboardPluginItems,
             homeMenuHandler(),
             ...customMenuHandler(this.state.menuItems, this.props.menuStates, this.props.currentLocale)
                 .sort((a, b) => a.position - b.position)
@@ -223,9 +223,6 @@ export default {
         mapType: mapTypeSelector(state),
         maps: state.maps && state.maps.results
             ? state.maps?.results?.map(map => ({...map, featuredEnabled: isFeaturedMapsEnabled(state) && state?.security?.user?.role === 'ADMIN'}))
-            : [],
-        dashboards: state.dashboards && state.dashboards.results
-            ? state.dashboards?.results?.map(dashboard => ({...dashboard, featuredEnabled: isFeaturedMapsEnabled(state) && state?.security?.user?.role === 'ADMIN'}))
             : [],
         currentLocale: currentLocaleSelector(state)
     }), {
