@@ -1,9 +1,9 @@
 import React from 'react';
-import {isEmpty}  from 'lodash';
+import {includes, isEmpty} from 'lodash';
 import {TOGGLE_MAP_MANAGER} from "../../actions/menuManager";
 import HTML  from '../../../MapStore2/web/client/components/I18N/HTML';
 
-export const mapsMenuHandler = (isOpen, router, role, maps = [], mapType, defaultMap = {}) => {
+export const mapsMenuHandler = (isOpen, router, role, maps = [], mapType, defaultMap = {}, items = []) => {
     const map = maps[0] || {};
     if (role !== "ADMIN" && (defaultMap.path || maps.length)) {
         return ({
@@ -37,6 +37,9 @@ export const mapsMenuHandler = (isOpen, router, role, maps = [], mapType, defaul
             payload: !isOpen
         }),
         text: <HTML msgId={"home.dropdown.mapsItem"}/>,
-        cfg: {glyph: "1-layer"}
+        cfg: {glyph: "1-layer"},
+        items: items
+            .filter((item) => role === "ADMIN" && isOpen && includes(['maps', 'createNewMap'], item.key))
+            .sort((a, b) => a.position - b.position)
     });
 };

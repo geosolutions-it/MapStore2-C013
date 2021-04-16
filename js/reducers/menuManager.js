@@ -8,7 +8,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { TOGGLE_MAP_MANAGER, TOGGLE_CUSTOM_MANAGER } from '../actions/menuManager';
+import { TOGGLE_MAP_MANAGER, TOGGLE_CUSTOM_MANAGER, TOGGLE_DASHBOARD_MANAGER } from '../actions/menuManager';
 
 const DEFAULT_STATE = {
     openMaps: false,
@@ -24,6 +24,11 @@ export default (state = DEFAULT_STATE, action) => {
         return {
             ...state,
             openMaps: action.payload || false
+        };
+    case TOGGLE_DASHBOARD_MANAGER:
+        return {
+            ...state,
+            openDashboardsMenu: action.payload
         };
     case TOGGLE_CUSTOM_MANAGER:
         const { customMenus } = state;

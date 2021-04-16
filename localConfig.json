@@ -770,16 +770,27 @@
       "Header",
       "LogoDescription",
       {"name": "CreateNewMap",
-      "cfg": {
-        "showNewDashboard": false,
-        "showNewGeostory": false
-      }},
+        "cfg": {
+          "showNewDashboard": false,
+          "showNewGeostory": false
+        }},
       {
         "name":"ManagerMenu",
         "cfg":{
           "enableContextManager":false
         }
       },
+      {
+        "name": "Dashboards",
+        "cfg": {
+          "mapsOptions": {
+            "start": 0,
+            "limit": 6
+          },
+          "fluid": true
+        }
+      },
+      "CreateNewDashboard",
       {
         "name":"Maps",
         "cfg":{
@@ -799,6 +810,92 @@
         }
       }
     ],
+    "dashboard": [{
+      "name": "OmniBar",
+      "cfg": {
+        "containerPosition": "header",
+        "className": "navbar shadow navbar-home"
+      }
+    },
+      {"name": "CreateNewMap",
+        "cfg": {
+          "showNewDashboard": false,
+          "showNewGeostory": false
+        }},
+      {
+        "name":"Maps",
+        "cfg":{
+          "mapsOptions":{
+            "start":0,
+            "limit":6
+          },
+          "fluid":true
+        }
+      },
+      {
+        "name": "Dashboards",
+        "cfg": {
+          "mapsOptions": {
+            "start": 0,
+            "limit": 6
+          },
+          "fluid": true
+        }
+      },
+      "CreateNewDashboard","Login", "Language", "NavMenu", "DashboardSave", "DashboardSaveAs", "Attribution", "Home",
+      {
+      "name": "Share",
+      "cfg": {
+        "showAPI": false,
+        "advancedSettings": false,
+        "shareUrlRegex": "(h[^#]*)#\\/dashboard\\/([A-Za-z0-9]*)",
+        "shareUrlReplaceString": "$1dashboard-embedded.html#/$2",
+        "embedOptions": {
+          "showTOCToggle": false,
+          "showConnectionsParamToggle": true
+        }
+      }
+    },
+      {
+        "name":"ManagerMenu",
+        "cfg":{
+          "enableContextManager":false
+        }
+      },
+      {
+        "name": "DashboardEditor",
+        "cfg": {
+          "catalog": {
+            "url": "https://gs-stable.geo-solutions.it/geoserver/csw",
+            "type": "csw",
+            "title": "GeoSolutions GeoServer CSW",
+            "autoload": true
+          },
+          "containerPosition": "columns"
+        }
+      }, {
+        "name": "QueryPanel",
+        "cfg": {
+          "toolsOptions": {
+            "hideCrossLayer": true,
+            "hideSpatialFilter": true
+          },
+          "containerPosition": "columns"
+        }
+      }, "BurgerMenu", "Dashboard", "Notifications", {
+        "name": "Tutorial",
+        "cfg": {
+          "allowClicksThruHole": false,
+          "containerPosition": "header",
+          "preset": "dashboard_tutorial"
+        }
+      },
+      {
+        "name": "FeedbackMask",
+        "cfg": {
+          "containerPosition": "header"
+        }
+      }],
     "manager":[
       "Header",
       "LogoDescription",
@@ -820,6 +917,16 @@
             "limit":6
           },
           "fluid":true
+        }
+      },
+      {
+        "name": "Dashboards",
+        "cfg": {
+          "mapsOptions": {
+            "start": 0,
+            "limit": 6
+          },
+          "fluid": true
         }
       }
     ],

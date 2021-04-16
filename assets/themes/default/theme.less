@@ -203,3 +203,38 @@ element.style {
         margin: 200px 100px;
     }
 }
+
+.dropdown-menu {
+    .ms-grid-container {
+        .pagination-toolbar.row {
+            display: block;
+            .col-xs-12 {
+                text-align: center;
+                > div:empty {
+                    display: none;
+                }
+            }
+        }
+        .row {
+            display: none;
+        }
+        .ms-grid.row {
+            display: block;
+            max-height: 40vh;
+            overflow-y: scroll;
+            padding-left: 15px;
+            padding-right: 15px;
+            .ms-map-card-col {
+                .gridcard.map-thumb {
+                    width: 280px;
+                }
+            }
+        }
+        span.glyphicon {
+            color: #ffffff;
+        }
+        .ms-map-card-col {
+            width: 100%
+        }
+    }
+}
