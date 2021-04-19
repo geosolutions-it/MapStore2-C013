@@ -28,9 +28,9 @@ module.exports = {
         SearchPlugin: require('./plugins/Search'),
         MapManagerMenuPlugin: require('./plugins/MapManagerMenu').default,
         TOCPlugin: require('./plugins/TOC'),
-        CreateNewDashboardPlugin: require('./plugins/Dashboard/CreateNewDashboard').default,
-        DashboardEditor: require('./plugins/Dashboard/DashboardEditor'),
-        DashboardsPlugin: require('./plugins/Dashboards/Dashboards').default,
+        CreateNewDashboardPlugin: require('./plugins/dashboard/CreateNewDashboard').default,
+        DashboardEditorPlugin: require('./plugins/dashboard/DashboardEditor'),
+        DashboardsPlugin: require('./plugins/dashboards/Dashboards').default,
         // product plugins
         AboutPlugin: require('../MapStore2/web/client/product/plugins/About'),
         AttributionPlugin: require('../MapStore2/web/client/product/plugins/Attribution'),
