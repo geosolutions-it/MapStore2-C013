@@ -103,19 +103,19 @@
           "selectedService":"gs_stable_csw",
           "services":{
             "gs_stable_csw":{
-              "url":"https://gs-stable.geo-solutions.it/geoserver/csw",
+              "url":"https://demo.geo-solutions.it/geoserver/csw",
               "type":"csw",
               "title":"GeoSolutions GeoServer CSW",
               "autoload":true
             },
             "gs_stable_wms":{
-              "url":"https://gs-stable.geo-solutions.it/geoserver/wms",
+              "url":"https://demo.geo-solutions.it/geoserver/wms",
               "type":"wms",
               "title":"GeoSolutions GeoServer WMS",
               "autoload":false
             },
             "gs_stable_wmts":{
-              "url":"https://gs-stable.geo-solutions.it/geoserver/gwc/service/wmts",
+              "url":"https://demo.geo-solutions.it/geoserver/gwc/service/wmts",
               "type":"wmts",
               "title":"GeoSolutions GeoServer WMTS",
               "autoload":false
@@ -866,7 +866,7 @@
         "name": "DashboardEditor",
         "cfg": {
           "catalog": {
-            "url": "https://gs-stable.geo-solutions.it/geoserver/csw",
+            "url": "https://demo.geo-solutions.it/geoserver/csw",
             "type": "csw",
             "title": "GeoSolutions GeoServer CSW",
             "autoload": true

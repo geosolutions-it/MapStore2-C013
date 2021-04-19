@@ -14,8 +14,8 @@ import {ButtonToolbar, Grid, Button as ButtonB, Col, Glyphicon} from 'react-boot
 import {
     loadingSelector,
     loadFlagsSelector
-} from '../../MapStore2/web/client/selectors/createnewmap';
-import tooltip from '../../MapStore2/web/client/components/misc/enhancers/tooltip';
+} from '../../../MapStore2/web/client/selectors/createnewmap';
+import tooltip from '../../../MapStore2/web/client/components/misc/enhancers/tooltip';
 const Button = tooltip(ButtonB);
 class CreateNewDashboard extends React.Component {
     static propTypes = {
