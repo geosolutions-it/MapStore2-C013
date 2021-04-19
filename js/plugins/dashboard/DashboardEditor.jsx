@@ -21,7 +21,7 @@ const { dashboardSelector, dashboardsLocalizedSelector } = require('../../../Map
 const { createWidget, toggleConnection } = require('../../../MapStore2/web/client/actions/widgets');
 const { triggerShowConnections } = require('../../../MapStore2/web/client/actions/dashboard');
 const dashboardReducer = require('../../../MapStore2/web/client/reducers/dashboard');
-const dashboardEpic = require('../../../MapStore2/web/client/epics/dashboard')
+const dashboardEpic = require('../../../MapStore2/web/client/epics/dashboard');
 
 const withDashboardExitButton = require('../../../MapStore2/web/client/plugins/widgetbuilder/enhancers/withDashboardExitButton');
 const LoadingSpinner = require('../../../MapStore2/web/client/components/misc/LoadingSpinner');
