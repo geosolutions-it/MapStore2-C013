@@ -89,7 +89,7 @@ export default {
         ManagerMenu: {
             name: 'createNewDashboard',
             key: 'createNewDashboard',
-            position: 3,
+            position: 4,
             tool: true,
             priority: 1
         }
